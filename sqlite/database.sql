@@ -20,6 +20,7 @@ CREATE TABLE Event(
 	image NVARCHAR2(50) NOT NULL,
 	eventDate DATE,
 	description NVARCHAR2(250),
+	local NVARCHAR2(100) NOT NULL,
 	type NVARCHAR2(20) NOT NULL
 );
 
