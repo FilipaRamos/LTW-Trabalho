@@ -1,11 +1,24 @@
 <?php
-    $database = sqlite_open('database.sql', 0666);
 
-    if ($database) {
-        $result = sqlite_query($dbconn,  "SELECT * FROM combo_calcs WHERE options='easy'");
-        var_dump(sqlite_fetch_array($result, SQLITE_ASSOC));
-    } else {
-        print "Connection to database failed!\n";
-    }
+	/**************************************/
+	/********  OPEN DATABASE.SQL **********/
+	/**************************************/
+
+	$file = new PDO('sqlite:database.sql');
+	// SET ERRORMODE TO EXCEPTIONS
+	$file->setAttribute(PDO::ATTR_ERRMODE, 
+                            PDO::ERRMODE_EXCEPTION);
+
+	
+
+	/****************************************/
+	/************ INSERT INTO ***************/
+	/****************************************/
+
+	$insert = "INSERT INTO messages (title, message, time) 
+                VALUES (:title, :message, :time)";
+    $stmt = $file->prepare($insert);
+
+   	
 
 ?>
