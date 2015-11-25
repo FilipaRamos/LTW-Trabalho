@@ -108,21 +108,21 @@
   	}
 
   	// GET DESCRIPTION BY ID
-  	function getEventDate($file, $id) {
+  	function getEventDescription($file, $id) {
   		$stmt = $file->prepare('SELECT description FROM Event WHERE id = ?');
   		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET LOCAL BY ID
-  	function getEventDate($file, $id) {
+  	function getEventLocal($file, $id) {
   		$stmt = $file->prepare('SELECT local FROM Event WHERE id = ?');
   		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET TYPE BY ID
-  	function getEventDate($file, $id) {
+  	function getEventType($file, $id) {
   		$stmt = $file->prepare('SELECT type FROM Event WHERE id = ?');
   		$stmt->execute(array($id));
     	return $stmt->fetch();
