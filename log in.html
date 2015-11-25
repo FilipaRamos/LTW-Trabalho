@@ -2,17 +2,19 @@
 	<html>
 		<head>
 			<title>COUNT ME IN </title>
-			 <link href="login.php">
+			 <link type="text/css" rel="stylesheet" href="login-form.css"/>
 		</head>
 		<body>
-			<form action="login.php" method="post">
-				User name: <br>
-				<input type="text" name="username" required>
-				<br>
-				Password: <br>
-				<input type="password" name="passwprd" required>
-				<br>
-				<input type="submit" value="Login">
-			</form>
+			<div class="logo"></div>
+				<div class="login-block">
+					<form action="sum2.php" method="POST">
+						<h1>Count me in</h1>
+						<input type="text" value="" placeholder="Username" id="username" required>						
+						<input type="password" value="" placeholder="Password" id="password" required>
+						<button id="login">log in</button>
+						<button id="register">register</button>
+					</form>
+				</div>
+			</div>
 		</body>
 	</html>
