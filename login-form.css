@@ -7,6 +7,7 @@ body{
 .logo {
     width: 213px;
     height: 36px;
+    /*background: url('https://scontent-frt3-1.xx.fbcdn.net/hphotos-xpa1/v/t34.0-12/12282761_10208158067849892_1437402373_n.jpg?oh=1bad9fbd4fd035d12fd54dd751c6fb48&oe=56581562') no-repeat; */
     margin: 30px auto;
 }
 
@@ -14,6 +15,7 @@ body{
     width: 320px;
     padding: 20px;
     background: #fff;
+    /*border-radius: 5px;*/
     margin: 0 auto;
 }
 
@@ -38,7 +40,9 @@ body{
     margin-bottom: 20px;
     font-size: 14px;
     font-family: Montserrat;
-    padding: 0 20px 0 50px;
+    /*padding: 0 20px 0 50px;*/
+    padding-left: 15px;
+    padding-right: 50px;
     outline: none;
 }
 
