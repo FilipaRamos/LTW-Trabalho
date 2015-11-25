@@ -15,7 +15,7 @@ CREATE TABLE User(
 -- TABLE EVENT
 
 CREATE TABLE Event(
-	id INTEGER PRIMARY KEY,
+	idEvent INTEGER PRIMARY KEY,
 	name NVARCHAR2(50) NOT NULL,	
 	image NVARCHAR2(50) NOT NULL,
 	eventDate DATE,
@@ -27,10 +27,37 @@ CREATE TABLE Event(
 
 -- TABLE JOIN
 
-CREATE TABLE Belong(
+/*CREATE TABLE Belong(
 	userID NVARCHAR2(20) REFERENCES User(username) ON DELETE CASCADE,
 	idEvent INTEGER REFERENCES Event(id) ON DELETE CASCADE,
 	Usertype NVARCHAR2(20) NOT NULL,
 	PRIMARY KEY (userID, idEvent),
 	CHECK (Usertype = 'admin' OR Usertype = 'watcher')
+);*/
+
+
+-- TABLE EVENT
+
+CREATE TABLE AdminEvent(
+	idEvent INTEGER REFERENCES  Event(idEvent),
+	username INTEGER REFERENCES User(username)
 );
+
+
+CREATE TABLE AttendEvent(
+	idEvent INTEGER REFERENCES  Event(idEvent),
+	username INTEGER REFERENCES User(username)
+);
+
+
+CREATE TABLE Comentario(
+	idComentario INTEGER PRIMARY KEY,
+	username REFERENCES User(username),
+	idEvent INTEGER REFERENCES  Event(idEvent)
+);
+
+CREATE TABLE EventType(
+	idType INTEGER PRIMARY KEY,
+	idEvent INTEGER REFERENCES  Event(idEvent)
+);
+

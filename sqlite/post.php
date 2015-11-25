@@ -139,7 +139,7 @@
   	}
 
   	// GET BELONG TABLE FROM EVENT ID
-  	function getBelongbyUserID($file, $idEvent) {
+  	function getBelongbyEventID($file, $idEvent) {
   		$stmt = $file->prepare('SELECT * FROM Belong WHERE idEvent = ?');
   		$stmt->execute(array($idEvent));
     	return $stmt->fetch();
@@ -148,7 +148,7 @@
   	// GET USER TYPE BY USER ID AND EVENT ID
   	function getBelongUserType($file, $userID, $idEvent) {
   		$stmt = $file->prepare('SELECT Usertype FROM Belong WHERE userID = ? AND idEvent = ?');
-  		$stmt->execute(array($userID, $idEvent);
+  		$stmt->execute(array($userID, $idEvent));
     	return $stmt->fetch();
   	}
   	/********************************************************/
