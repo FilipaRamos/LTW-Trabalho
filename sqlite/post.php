@@ -51,28 +51,28 @@
   	// GET USER BY USERNAME
   	function getUser($file, $username){
 		$stmt = $file->prepare('SELECT * FROM User WHERE username = ?');
-  		$stmt->execute(array($_GET['username']));
+  		$stmt->execute(array($username));
     	return $stmt->fetch();
   	}
 
   	// GET PASSWORD BY USERNAME
   	function getUserPassword($file, $username) {
   		$stmt = $file->prepare('SELECT password FROM User WHERE username = ?');
-  		$stmt->execute(array($_GET['username']));
+  		$stmt->execute(array($username));
     	return $stmt->fetch();
   	}
 
   	// GET NAME BY USERNAME
   	function getUserName($file, $username) {
   		$stmt = $file->prepare('SELECT name FROM User WHERE username = ?');
-  		$stmt->execute(array($_GET['username']));
+  		$stmt->execute(array($username));
     	return $stmt->fetch();
   	}
 
   	// GET EMAIL BY USERNAME
   	function getUserEmail($file, $username) {
   		$stmt = $file->prepare('SELECT email FROM User WHERE username = ?');
-  		$stmt->execute(array($_GET['username']));
+  		$stmt->execute(array($username));
     	return $stmt->fetch();
   	}
   	/**************************************/
@@ -82,49 +82,49 @@
   	// GET EVENT BY ID
   	function getEvent($file, $id) {
   		$stmt = $file->prepare('SELECT * FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET NAME BY ID
   	function getEventName($file, $id) {
   		$stmt = $file->prepare('SELECT name FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET IMAGE BY ID
   	function getEventImage($file, $id) {
   		$stmt = $file->prepare('SELECT image FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET EVENT DATE BY ID
   	function getEventDate($file, $id) {
   		$stmt = $file->prepare('SELECT eventDate FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET DESCRIPTION BY ID
   	function getEventDate($file, $id) {
   		$stmt = $file->prepare('SELECT description FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET LOCAL BY ID
   	function getEventDate($file, $id) {
   		$stmt = $file->prepare('SELECT local FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
 
   	// GET TYPE BY ID
   	function getEventDate($file, $id) {
   		$stmt = $file->prepare('SELECT type FROM Event WHERE id = ?');
-  		$stmt->execute(array($_GET['id']));
+  		$stmt->execute(array($id));
     	return $stmt->fetch();
   	}
   	/****************************************************/
@@ -134,21 +134,21 @@
   	// GET BELONG TABLE FROM USER ID
   	function getBelongbyUserID($file, $userID) {
   		$stmt = $file->prepare('SELECT * FROM Belong WHERE userID = ?');
-  		$stmt->execute(array($_GET['userID']));
+  		$stmt->execute(array($userID));
     	return $stmt->fetch();
   	}
 
   	// GET BELONG TABLE FROM EVENT ID
   	function getBelongbyUserID($file, $idEvent) {
   		$stmt = $file->prepare('SELECT * FROM Belong WHERE idEvent = ?');
-  		$stmt->execute(array($_GET['idEvent']));
+  		$stmt->execute(array($idEvent));
     	return $stmt->fetch();
   	}
 
   	// GET USER TYPE BY USER ID AND EVENT ID
   	function getBelongUserType($file, $userID, $idEvent) {
   		$stmt = $file->prepare('SELECT Usertype FROM Belong WHERE userID = ? AND idEvent = ?');
-  		$stmt->execute(array($_GET['userID']));
+  		$stmt->execute(array($userID, $idEvent);
     	return $stmt->fetch();
   	}
   	/********************************************************/
