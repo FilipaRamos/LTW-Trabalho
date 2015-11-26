@@ -21,50 +21,49 @@ INSERT INTO User(username, password, name, email)
 
 -- EVENT
 
-INSERT INTO Event(id, name, image, eventDate, description, type) 
-			VALUES(1, 'Churrasco dos Cerqueiras', 'churrasco.png', '2015-12-10', 'Vamos juntar-nos para fazer alta churrascada!!', 'party'); 
+INSERT INTO Event(idEvent, name, image, eventDate, startHour, description, local, type) 
+			VALUES(1, 'Churrasco dos Cerqueiras', 'churrasco.png', '2015-12-10', '12:00:00', 'Vamos juntar-nos para fazer alta churrascada!!', 'Casa dos Cerqueiras', 'party'); 
 
-INSERT INTO Event(id, name, image, eventDate, description, type) 
-			VALUES(2, 'Discussao das Contas Publicas 2015', 'contas.jpg', '2015-11-20', 'Discussão das contas divulgadas pelo estado em 2015.', 'conference'); 
+INSERT INTO Event(idEvent, name, image, eventDate, startHour, description, local, type) 
+			VALUES(2, 'Discussao das Contas Publicas 2015', 'contas.jpg', '2015-11-20', '15:30:00', 'Discussao das contas divulgadas pelo estado em 2015.', 'Camara Municipal', 'conference'); 
 
-INSERT INTO Event(id, name, image, eventDate, description, type) 
-			VALUES(3, 'Gamers Heaven', 'game.jpg', '2015-11-29', 'MEGA LAN PARTY PESSOAL!!!', 'party'); 
+INSERT INTO Event(idEvent, name, image, eventDate, startHour, description, local, type) 
+			VALUES(3, 'Gamers Heaven', 'game.jpg', '2015-11-29', '19:59:20', 'MEGA LAN PARTY PESSOAL!!!', 'Casa dos Fixes', 'party'); 
 
--- ADMIN EVENT
-
-INSERT INTO AdminEvent(idEvent, username)
-			VALUES(1, 'XxuserxX');
-
-INSERT INTO AdminEvent(idEvent, username)
-			VALUES(2, 'workGirl');
-
-INSERT INTO AdminEvent(idEvent, username)
-			VALUES(3, 'inspGamer');
 
 -- ATTEND EVENT
 
-INSERT INTO AttendEvent(idEvent, username)
-			VALUES(1, 'grannyO32');
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(3, 'inspGamer', 'admin');
 
-INSERT INTO AttendEvent(idEvent, username)
-			VALUES(1, 'inspGamer');
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(2, 'workGirl', 'admin');
 
-INSERT INTO AttendEvent(idEvent, username)
-			VALUES(2, 'grannyO32');
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(1, 'XxuserxX', 'admin');
 
-INSERT INTO AttendEvent(idEvent, username)
-			VALUES(3, 'XxuserxX');
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(1, 'grannyO32', 'attender');
+
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(1, 'inspGamer', 'attender');
+
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(2, 'grannyO32', 'attender');
+
+INSERT INTO AttendEvent(idEvent, username, type)
+			VALUES(3, 'XxuserxX', 'attender');
 
 -- COMMENT
 
-INSERT INTO Comentario(idComentario, username, idEvent)
-			VALUES(1, 'XxuserxX', 1);
+INSERT INTO Comentario(idComentario, username, idEvent, comentario)
+			VALUES(1, 'XxuserxX', 1, 'askfjhsadfkjshadflasjd');
 
-INSERT INTO Comentario(idComentario, username, idEvent)
-			VALUES(2, 'grannyO32', 2);
+INSERT INTO Comentario(idComentario, username, idEvent, comentario)
+			VALUES(2, 'grannyO32', 2, 'AAAAAAAAAAAAAAAAAAAAA');
 
-INSERT INTO Comentario(idComentario, username, idEvent)
-			VALUES(3, 'XxuserxX', 3);
+INSERT INTO Comentario(idComentario, username, idEvent, comentario)
+			VALUES(3, 'XxuserxX', 3, 'CCCCCCCCCCCCCCCCCCCCCCCCCC!!!!!!!');
 
 
 

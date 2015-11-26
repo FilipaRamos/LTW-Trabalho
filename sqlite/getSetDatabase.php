@@ -2,30 +2,6 @@
 
 	include_once('connection.php');
 
-<<<<<<< HEAD
-=======
-	/****************************************/
-	/************ INSERT INFO ***************/
-	/****************************************/
-	
-	function insertUser($file, $username, $password, $name, $email) {
-		$stmt = $file->$prepare = ('INSERT INTO User (username, password, name, email) 
-                VALUES (:username, :password, :name, :email');
-    	$stmt->execute(array($username, $password, $name, $email));
-	}
-
-	function insertEvent($file, $id, $name, $image, $eventDate, $description, $local, $type) {
-		$stmt = $file->$prepare = ('INSERT INTO Event (id, name, image, eventDate, description, local, type) 
-                VALUES (:id, :name, :image, :eventDate, :description, :local, :type');
-    	$stmt->execute(array($id, $name, $image, $eventDate, $description, $local, $type));
-	}
-
-	function insertBelong($file, $userID, $idEvent, $Usertype) {
-		$stmt = $file->$prepare = ('INSERT INTO Belong (userID, idEvent, Usertype) 
-                VALUES (:userID, :idEvent, :Usertype');
-    	$stmt->execute(array($userID, $idEvent, $Usertype));
-	}
-
 	/****************************************/
 	/************** GET INFO ***************/
 	/***************************************/
@@ -52,7 +28,6 @@
    	 	$stmt->execute();
    	 	$result = $stmt->fetchAll();
   	}
->>>>>>> origin/master
 	  
 	function getUser($username){
 		global $file;
@@ -65,7 +40,6 @@
 		}  
 		return true;
 	}
-	  
 	  
 	function checkLogIn($username, $password){
 		global $file;
@@ -168,9 +142,7 @@
 		}		
 	}
 	  
-	  
-<<<<<<< HEAD
-	  function deleteEvent($idEvent){
+	function deleteEvent($idEvent){
 		   global $file;
 	
 		  $stmt = $file->prepare('DELETE FROM AttendEvent WHERE idEvent = :idEvent');
@@ -190,14 +162,14 @@
 		  if(!$result)
 			   	return false;
 			else return true; 
-=======
+
 	function deleteEvent(){
->>>>>>> origin/master
+
 		  
 	}
 	  
 	  
-	  function editEvent($idEvent, $name, $newname, $eventDateStart, $neweventDateStart, $eventDateEnd, $neweventDateEnd, 
+	function editEvent($idEvent, $name, $newname, $eventDateStart, $neweventDateStart, $eventDateEnd, $neweventDateEnd, 
 	  					$description, $newdescription, $local, $newlocal, $type, $newType){
 		 
 			$stmt = $file->prepare('UPDATE Event SET name = :newname WHERE idEvent = :idEvent');
@@ -231,7 +203,7 @@
 			$result = $stmt->fetch();
 		  
 		  
-	  }
+	}
 	  
 	 
 
