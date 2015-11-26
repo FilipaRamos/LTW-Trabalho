@@ -30,25 +30,41 @@ INSERT INTO Event(id, name, image, eventDate, description, type)
 INSERT INTO Event(id, name, image, eventDate, description, type) 
 			VALUES(3, 'Gamers Heaven', 'game.jpg', '2015-11-29', 'MEGA LAN PARTY PESSOAL!!!', 'party'); 
 
--- JOIN
+-- ADMIN EVENT
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('XxuserxX', 1, 'admin');
+INSERT INTO AdminEvent(idEvent, username)
+			VALUES(1, 'XxuserxX');
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('grannyO32', 1, 'watcher');
+INSERT INTO AdminEvent(idEvent, username)
+			VALUES(2, 'workGirl');
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('inspGamer', 1, 'watcher');
+INSERT INTO AdminEvent(idEvent, username)
+			VALUES(3, 'inspGamer');
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('workGirl', 2, 'admin');
+-- ATTEND EVENT
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('XxuserxX', 2, 'watcher');
+INSERT INTO AttendEvent(idEvent, username)
+			VALUES(1, 'grannyO32');
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('inspGamer', 3, 'admin');
+INSERT INTO AttendEvent(idEvent, username)
+			VALUES(1, 'inspGamer');
 
-INSERT INTO Belong(userID, idEvent, Usertype)
-			VALUES('XxuserxX', 3, 'watcher');
+INSERT INTO AttendEvent(idEvent, username)
+			VALUES(2, 'grannyO32');
+
+INSERT INTO AttendEvent(idEvent, username)
+			VALUES(3, 'XxuserxX');
+
+-- COMMENT
+
+INSERT INTO Comentario(idComentario, username, idEvent)
+			VALUES(1, 'XxuserxX', 1);
+
+INSERT INTO Comentario(idComentario, username, idEvent)
+			VALUES(2, 'grannyO32', 2);
+
+INSERT INTO Comentario(idComentario, username, idEvent)
+			VALUES(3, 'XxuserxX', 3);
+
+
+
