@@ -16,9 +16,10 @@ CREATE TABLE User(
 
 CREATE TABLE Event(
 	idEvent INTEGER PRIMARY KEY,
-	name NVARCHAR2(50) NOT NULL,	
-	image NVARCHAR2(50) NOT NULL,
-	eventDate DATE,
+	username INTEGER REFERENCES User(username),
+	name NVARCHAR2(50) NOT NULL,
+	eventDateStart DATE,
+	eventDateEnd DATE,
 	description NVARCHAR2(250),
 	local NVARCHAR2(100) NOT NULL,
 	type NVARCHAR2(20) NOT NULL
@@ -53,11 +54,12 @@ CREATE TABLE AttendEvent(
 CREATE TABLE Comentario(
 	idComentario INTEGER PRIMARY KEY,
 	username REFERENCES User(username),
-	idEvent INTEGER REFERENCES  Event(idEvent)
+	idEvent INTEGER REFERENCES  Event(idEvent),
+	comentario  NVARCHAR2(200) 
 );
 
-CREATE TABLE EventType(
+/*CREATE TABLE EventType(
 	idType INTEGER PRIMARY KEY,
 	idEvent INTEGER REFERENCES  Event(idEvent)
-);
+);*/
 
