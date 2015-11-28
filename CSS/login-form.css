@@ -1,0 +1,112 @@
+body{
+	background: url("https://secure.static.tumblr.com/a7e734d7d8c1935df793742601b4515f/gdxmirk/DIVnot4ry/tumblr_static_app9yovr0ls8cgkcwkwcwwk8c_640_v2.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    font-family: Montserrat;
+}
+
+.logo {
+    width: 213px;
+    height: 36px;
+    /*background: url('https://scontent-frt3-1.xx.fbcdn.net/hphotos-xpa1/v/t34.0-12/12282761_10208158067849892_1437402373_n.jpg?oh=1bad9fbd4fd035d12fd54dd751c6fb48&oe=56581562') no-repeat; */
+    margin: 30px auto;
+}
+
+.login-block {
+    width: 320px;
+    padding: 20px;
+    background: #fff;
+    /*border-radius: 5px;*/
+    margin: 0 auto;
+}
+
+.login-block h1 {
+    padding-top: 50px;
+    text-align: center;
+    color: #ff6699;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal; 
+}
+
+.login-block input {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+   /* border-radius: 5px;*/
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: Montserrat;
+    /*padding: 0 20px 0 50px;*/
+    padding-left: 15px;
+    padding-right: 50px;
+    outline: none;
+}
+
+/*
+.login-block input#username {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#username:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password:focus {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+*/
+
+.login-block input:active, .login-block input:focus {
+    border: 1px solid #4d94ff;
+}
+
+.login-block button#login{
+    width: 100%;
+    height: 40px;
+    background: #4d94ff;
+    box-sizing: border-box;
+    /*border-radius: 5px;*/
+    border: 1px solid #008ae6;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Montserrat;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-block button#register{
+    margin-top: 5px;
+    width: 100%;
+    height: 40px;
+    background: #ff3377;
+    box-sizing: border-box;
+    border: 1px solid #ff0055;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Montserrat;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-block button:hover {
+    background: #005ce6;
+}

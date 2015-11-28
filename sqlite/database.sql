@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS EventType;
 -- TABLE USER
 
 CREATE TABLE User(
-	username NVARCHAR2(20) PRIMARY KEY,
+	idUser INTEGER PRIMARY KEY,
+	username NVARCHAR2(20) NOT NULL,
 	password NVARCHAR2(50) NOT NULL,
 	name NVARCHAR2(50) NOT NULL,
 	email NVARCHAR2(50) NOT NULL
@@ -18,37 +19,34 @@ CREATE TABLE User(
 
 CREATE TABLE Event(
 	idEvent INTEGER PRIMARY KEY,
+	idUser INTEGER REFERENCES User(idUser),
 	name NVARCHAR2(50) NOT NULL,
 	image NVARCHAR2(500),
 	eventDate DATE,
 	startHour TIME,
 	description NVARCHAR2(250),
 	local NVARCHAR2(100) NOT NULL,
-	type NVARCHAR2(20) NOT NULL
+	type NVARCHAR2(20) NOT NULL,
+	CHECK (type = 'public' OR type = 'private')
 );
 
 CREATE TABLE AttendEvent(
 	idEvent INTEGER,
-	username INTEGER,
-	type NVARCHAR2(20),
-	PRIMARY KEY (idEvent, username),
+	idUser INTEGER,
+	attend NVARCHAR2(20),
+	PRIMARY KEY (idEvent, idUser),
 	FOREIGN KEY (idEvent) REFERENCES Event(idEvent) ON DELETE CASCADE,
-	FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE,
-	CHECK (type = 'admin' OR type = 'attender')
+	FOREIGN KEY (idUser) REFERENCES User(idUser) ON DELETE CASCADE,
+	CHECK (attend = 'yes' OR attend = 'no')
 );
 
 CREATE TABLE Comentario(
-	idComentario INTEGER,
-	username NVARCHAR2(20),
-	idEvent INTEGER,
-	comentario NVARCHAR2(200),
-	PRIMARY KEY (username, idEvent),
-	FOREIGN KEY (username) REFERENCES User(username),
-	FOREIGN KEY (idEvent) REFERENCES Event(idEvent)
+	idComentario INTEGER PRIMARY KEY,
+	idUser INTEGER REFERENCES User(idUser),
+	idEvent INTEGER REFERENCES Event(idEvent),
+	comentario NVARCHAR2(200)
 );
 
-/*CREATE TABLE EventType(
-	idType INTEGER PRIMARY KEY,
-	idEvent INTEGER REFERENCES  Event(idEvent)
-);*/
+
+.read insert.sql
 
