@@ -1,0 +1,17 @@
+body{
+	background: url("https://secure.static.tumblr.com/a7e734d7d8c1935df793742601b4515f/gdxmirk/DIVnot4ry/tumblr_static_app9yovr0ls8cgkcwkwcwwk8c_640_v2.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    font-family: Montserrat;
+}
+
+.options{
+    background-color: yellow;
+    padding: 50px 0 50px 0px;
+}
+
+.side-bars{
+    background-color: red;
+}

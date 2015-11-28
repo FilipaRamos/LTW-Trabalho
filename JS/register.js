@@ -1,32 +1,28 @@
 $("window").ready(function () {
-	$("#regiterForm").submit(function (ev) {
+	$("#registerForm").submit(function (ev) {
 		ev.preventDefault();
-		var username = $("#regiterForm #username").val();
-		var password = $("#regiterForm #password").val();
-		var name = $("#regiterForm #name").val();
-		var email =  $("#regiterForm #email").val();
+		var username = $("#registerForm #username").val();
+		var password = $("#registerForm #password").val();
+		var nome = $("#registerForm #name").val();
+		var email =  $("#registerForm #email").val();
 
 		$.post(
-		//nome do ficheiro
 			'../PHP/register.php',
 			{
 				'username': username,
 				'password': password,
-				'name' : name,
+				'name' : nome,
 				'email' : email
 			},
-
-			//argumentos
-			
 			function (data) {
 				var resposta = data['register'];
-			
+				
 				switch (resposta) {
 					case 'error':
 						sweetAlert("Oops...", "User or password wrong!", "error");
 						break;
 					case 'success':
-						swal("Login successful", "", "success")
+						window.location.replace('user.html');
 						break;
 					default:
 						break;
@@ -34,5 +30,5 @@ $("window").ready(function () {
 			}).fail(function (error) {
 				return false;
 			});
-	});
+	});	
 });

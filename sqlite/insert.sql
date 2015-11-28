@@ -41,10 +41,7 @@ INSERT INTO AttendEvent(idEvent, idUser, attend)
 
 INSERT INTO AttendEvent(idEvent, idUser, attend)
 			VALUES(2, 4, 'yes');
-
-INSERT INTO AttendEvent(idEvent, idUser, attend)
-			VALUES(1, 1, 'yes');
-
+			
 INSERT INTO AttendEvent(idEvent, idUser, attend)
 			VALUES(1, 2, 'yes');
 

@@ -22,7 +22,7 @@ $("window").ready(function () {
 						sweetAlert("Oops...", "User or password wrong!", "error");
 						break;
 					case 'success':
-						swal("Login successful", "", "success")
+						window.location.replace("user.php");
 						break;
 					default:
 						break;

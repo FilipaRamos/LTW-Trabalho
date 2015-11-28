@@ -1,6 +1,6 @@
 <?php 
 	include_once('process.php');
-		
+
 	function response($value){
 		$data = ['register' => $value];
 		header('Content-Type: application/json');
