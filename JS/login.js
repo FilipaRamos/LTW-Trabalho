@@ -22,7 +22,7 @@ $("window").ready(function () {
 						sweetAlert("Oops...", "User or password wrong!", "error");
 						break;
 					case 'success':
-						window.location.replace("user.php");
+						window.location.href = "user.php";
 						break;
 					default:
 						break;

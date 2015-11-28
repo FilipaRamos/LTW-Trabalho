@@ -26,11 +26,36 @@ function checkLogIn($username, $password){
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	
-	if(!($result[0]['password'] === $password)){
+	if (count($result) === 0) {
 		return false;
 	}
 	
-	return true;	
+	$hashed = $result[0]['password'];
+	
+	if(!function_exists('hash_equals')){
+		function hash_equals($str1, $str2)
+		{
+			if(strlen($str1) != strlen($str2))
+			{
+				return false;
+			}
+			else
+			{
+				$res = $str1 ^ $str2;
+				$ret = 0;
+				for($i = strlen($res) - 1; $i >= 0; $i--)
+				{
+					$ret |= ord($res[$i]);
+				}
+				return !$ret;
+			}
+		}
+	}
+	
+	if(hash_equals($hashed, crypt($password, $hashed))){
+		return true;
+	}
+	return false;	
 }
 
 function createUser($username, $password, $name, $email){
@@ -38,10 +63,17 @@ function createUser($username, $password, $name, $email){
 	
 	if(existsUser($username))
 		return false;
+		
+	$options = [
+    		'cost' => 12,
+		];
+		
+	$pass = password_hash($password, PASSWORD_BCRYPT, $options);
 	
+		
 	$stmt = $file->prepare('INSERT INTO User(username, password, name, email) VALUES (:username, :password, :name, :email)');
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-	$stmt->bindParam(':password', $password, PDO::PARAM_STR);
+	$stmt->bindParam(':password', $pass, PDO::PARAM_STR);
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 	$stmt->execute();

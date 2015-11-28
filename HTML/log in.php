@@ -1,7 +1,7 @@
 <?php 
 		session_start();
 		if (isset($_SESSION["username"])) {
-				header("Location:google.pt");
+				header("Location: user.php");
 		}					
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 						<input type="password" value="" placeholder="Password" id="password" required>
 						<button type="submit" id="login">log in</button>
 					</form>
-						<a href="register.php"><button id="register">register</button></a>
+						<a href="register.html"><button id="register">register</button></a>
 				</div>
 				<script src="../sweetalert-master/dist/sweetalert.min.js"></script> 
 		</body>

@@ -5,7 +5,8 @@ $("window").ready(function () {
 		var password = $("#registerForm #password").val();
 		var nome = $("#registerForm #name").val();
 		var email =  $("#registerForm #email").val();
-
+		
+		
 		$.post(
 			'../PHP/register.php',
 			{
@@ -19,10 +20,10 @@ $("window").ready(function () {
 				
 				switch (resposta) {
 					case 'error':
-						sweetAlert("Oops...", "User or password wrong!", "error");
+						sweetAlert("Oops...", "User already exists!", "error");
 						break;
 					case 'success':
-						window.location.replace('user.html');
+						window.location.replace('user.php');
 						break;
 					default:
 						break;
