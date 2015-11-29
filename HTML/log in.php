@@ -12,6 +12,8 @@
 			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 			 <script src="../JS/login.js"></script>
 			 <link rel="stylesheet" type="text/css" href="../sweetalert-master/dist/sweetalert.css">
+			 <link href='https://fonts.googleapis.com/css?family=Oxygen:400,700,300' rel='stylesheet' type='text/css'>
+			 <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 		</head>
 		<body>
 			<div class="logo"></div>

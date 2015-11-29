@@ -1,5 +1,5 @@
 body{
-	background: url("../images/holi4.jpg");
+	background: url("../images/holi1.jpg");
 	background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -7,11 +7,125 @@ body{
     font-family: Montserrat;
 }
 
-.options{
-    background-color: yellow;
-    padding: 50px 0 50px 0px;
+.nav-bar{
+    background-color: #FFC800;
+     width: 100%;
+     position: absolute;
+     top: 0;
+     height: 10%;
 }
 
-.side-bars{
-    background-color: red;
+
+.nav-bar input#search{
+    margin-left: 10%;
+    height: 30px;
+    width:10%;
+    top:0;
+    font-family: 'Raleway', sans-serif;
+    position: relative; 
+    display: inline; 
+}
+
+.nav-bar button#search-icon{
+    top:0;
+    height: 30px;
+    position: relative; 
+    display: inline; 
+}
+
+.nav-bar button#logOut{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+   margin-left: 5px;
+    top:0;
+    position: relative; 
+    display: inline; 
+    float:right;
+    margin-right: 10%;
+}
+
+.nav-bar button#settings{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin-left: 5px;
+    top:0;
+    position: relative; 
+    display: inline; 
+    float:right;
+}
+	
+.nav-bar button#createEvent{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin-left: 5px;
+    top:0;
+    position: relative; 
+    display: inline; 
+    float:right;
+    
+}
+
+.nav-bar label#profile{
+    margin-left: 5px;
+    padding: 0.5%;
+    top:0;
+    position: relative; 
+    display: inline; 
+    float:right;
+     font-family: 'Raleway', sans-serif;
+}
+
+.event-block{
+    background-color: rgba(152, 77, 0, 0.48);
+    position: relative;
+    margin-top: 5%;
+    width: 60%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.events-list-Admin{
+    background-color: #DAAC05;
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5%;
+    
+}
+
+.events-list-Attending{
+    background-color: #DAAC05;
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5%;
+    
+}
+
+.event-block h3{
+    text-align: left;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 20%;
+}
+
+.events-list-Admin p{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
+.events-list-Attending p{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
 }

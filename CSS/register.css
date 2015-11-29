@@ -1,7 +1,7 @@
 body{
-	background: url("../images/holi4.jpg") no-repeat fixed center center;
+	background: url("../images/holi1.jpg") no-repeat fixed center center;
 	background-size: cover;
-    font-family: Montserrat;
+    font-family: 'Raleway', sans-serif;
 }
 
 .register {
@@ -18,14 +18,13 @@ body{
 }
 
 .register-block h1 {
-    padding-top: 50px;
     text-align: center;
     color: #ff6699;
-    font-size: 18px;
+    font-size: 35px;
     text-transform: uppercase;
-    margin-top: 0;
-    margin-bottom: 50px;
-    font-family: 'Times New Roman', Times, serif;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Raleway', sans-serif;
     font-style: normal; 
 }
 
@@ -36,7 +35,7 @@ body{
     border: 1px solid #ccc;
     margin-bottom: 20px;
     font-size: 14px;
-    font-family: Montserrat;
+    font-family: 'Raleway', sans-serif;
     padding-left: 15px;
     padding-right: 50px;
     outline: none;
@@ -57,11 +56,31 @@ body{
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: Montserrat;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+
+.register-block button#cancel{
+    width: 100%;
+    height: 40px;
+    background: #4d94ff;
+    box-sizing: border-box;
+    border: 1px solid #008ae6;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
     outline: none;
     cursor: pointer;
 }
 
+
 .register-block button:hover {
     background: #005ce6;
 }
+
+

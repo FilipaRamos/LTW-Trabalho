@@ -15,6 +15,17 @@ function existsUser($username){
 	return true;
 }
 
+function getUser($idUser){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT name FROM User WHERE idUser = :idUser;');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	return $result;
+}
+
 function checkLogIn($username, $password){
 	$file=new PDO('sqlite:../sqlite/database.db');
 
