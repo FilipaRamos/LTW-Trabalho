@@ -15,17 +15,6 @@ function existsUser($username){
 	return true;
 }
 
-function getUser($idUser){
-	$file=new PDO('sqlite:../sqlite/database.db');
-	
-	$stmt = $file->prepare('SELECT name FROM User WHERE idUser = :idUser;');
-	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_STR);
-	$stmt->execute();
-	$result = $stmt->fetchAll();
-	
-	return $result;
-}
-
 function checkLogIn($username, $password){
 	$file=new PDO('sqlite:../sqlite/database.db');
 
@@ -247,10 +236,31 @@ function deleteUser($idUser){
 	else return true;  
 	
 }
+function createEvent($idUser, $name, $image, $eventDate, $startHour, $description, $local, $type){
+	
+	$file=new PDO('sqlite:../sqlite/database.db');
+		
+	$stmt = $file->prepare('INSERT INTO Event(name, image, eventDate, startHour, description, local, type) VALUES (:name, :image, :eventDate, :startHour, :description, :local, :type) WHERE idUser = :idUser');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->bindParam(':image', $pass, PDO::PARAM_STR);
+	$stmt->bindParam(':eventDate', $eventDate, PDO::PARAM_STR);
+	$stmt->bindParam(':startHour', $startHour, PDO::PARAM_INT);
+	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
+	$stmt->bindParam(':local', $local, PDO::PARAM_STR);
+	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	return true;
+	
+}
 
 function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $neweventDate, $startHour, $newstartHour, 
 	$description, $newdescription, $local, $newlocal, $type, $newtype){
-
+		
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
 	$stmt = $file->prepare('UPDATE Event SET name = :newname WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':newname', $newname, PDO::PARAM_STR);
@@ -330,6 +340,8 @@ function userEventsAttending($idUser){
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
+	
+	$retorno = array();
 	
 	foreach($result as $row) {
 		$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent');
