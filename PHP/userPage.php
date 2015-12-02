@@ -1,6 +1,7 @@
 <?php 
 	include_once('process.php');
 
+	php.ini.file_uploads = On;
 	
 	function response($value){
 		$data = ['userpage' => $value];
@@ -8,7 +9,7 @@
 		echo json_encode($data);
 	}
 	
-	$params = [ 'idUser' ,'name', 'image', 'eventDate', 'startHour', 'description' , 'local', 'type'];
+	$params = [ 'idUser' ,'name', 'image', 'eventDate', 'startHour', 'description' , 'local', 'partyType', 'type'];
 	
 	
 	
@@ -19,7 +20,7 @@
 		}
 	}
 
-	if (!(createEvent($params['idUser'], $params['name'], $params['image'], $params['eventDate'], $params['startHour'], $params['description'], $params['local'], $params['type']))) {
+	if (!(createEvent($params['idUser'], $params['name'], $params['image'], $params['eventDate'], $params['startHour'], $params['description'], $params['local'],$params['partyType'], $params['type']))) {
 		response("error");
 	}
 	else{

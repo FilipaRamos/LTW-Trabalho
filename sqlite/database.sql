@@ -26,6 +26,7 @@ CREATE TABLE Event(
 	startHour TIME,
 	description NVARCHAR2(250),
 	local NVARCHAR2(100) NOT NULL,
+	partyType NVARCHAR2(20) NOT NULL,
 	type NVARCHAR2(20) NOT NULL,
 	CHECK (type = 'public' OR type = 'private')
 );
@@ -48,5 +49,9 @@ CREATE TABLE Comentario(
 );
 
 
-.read insert.sql
+CREATE TRIGGER AttendAuto AFTER INSERT ON Event FOR EACH ROW
+BEGIN
+INSERT INTO AttendEvent VALUES(New.idEvent,New.idUser,"yes");
+END;
 
+	

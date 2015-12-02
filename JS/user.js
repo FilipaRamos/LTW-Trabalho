@@ -9,11 +9,12 @@ $("window").ready(function () {
 			$(".createEvent").css("visibility","hidden")
 	});
 	
-	$("#events-list-Admin #events-card-Admin").click(function(){
+	$(".events-card-Admin").click(function(){
 			swal("yay!!");
+			window.location.href = "eventPage.php" + window.location.search;
 	});
 	
-	$("#events-list-Attending #events-card-Attending").click(function(){
+	$(".events-card-Attending").click(function(){
 			swal("NO!!");
 	});
 	
@@ -41,7 +42,6 @@ $("window").ready(function () {
 		ev.preventDefault();
 		var idUser = getUrlParameter('idUser');
 
-		swal(idUser);
 		var nome = $("#createEventForm #name").val();
 		var imagem = $("#createEventForm #image").val();
 		var eventDate = $("#createEventForm #eventDate").val();
@@ -49,6 +49,7 @@ $("window").ready(function () {
 		var descricao =  $("#createEventForm #description").val();
 		var local =  $("#createEventForm #local").val();
 		var tipo =  $("#createEventForm").find("input[type='radio'][name='type']:checked").val();
+		var partyType =  $("#createEventForm #partyType").val();
 		
 		$.post(
 			'../PHP/userPage.php',
@@ -60,6 +61,7 @@ $("window").ready(function () {
 				'startHour' : eventHour,
 				'description' : descricao,
 				'local' : local,
+				'partyType' : partyType,
 				'type' : tipo
 			},
 			
@@ -72,12 +74,13 @@ $("window").ready(function () {
 						break;
 					case 'success':
 						swal("YAY NEW EVENT!!");
-						$("#createEventForm").css("visibility","hiden");
+						$(".createEvent").css("visibility","hidden");
 						break;
 					default:
 						break;
 				}
 			}).fail(function (error) {
+				swal("FAILED!!");
 				return false;
 			});
 	});	
@@ -102,7 +105,7 @@ $("window").ready(function () {
 			},
 			
 			function (data) {
-				var resposta = data['userpage'];
+				var resposta = data['createUser'];
 				
 				switch (resposta) {
 					case 'error':
@@ -111,6 +114,7 @@ $("window").ready(function () {
 					case 'success':
 						swal("YAY NEW EVENT!!");
 						$("#createEventForm").css("visibility","hiden");
+						location.reload();
 						break;
 					default:
 						break;

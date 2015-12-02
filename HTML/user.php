@@ -73,7 +73,8 @@
 						echo '</div>';
 					?>
 				</div>
-				<div class= "createEvent">
+			</div>
+			<div class= "createEvent">
 						<form id="createEventForm">
 							<input type="text" value="" placeholder="Name" id="name" required>					
 							<input type="file" placeholder="holi1.jpg" id="image">
@@ -81,14 +82,14 @@
 							<input type="time" value="" placeholder="Hour" id="startHour" required>
 							<input type="text" value="" placeholder="Description" id="description">					
 							<input type="text" value="" placeholder="Local" id="local" required>
+							<input type="text" value="" placeholder="Party type eg: party" id="partyType" required>	
 							<input type="radio"  value="public" name="type" id="typePublic" checked>public
 							<input type="radio" value="private"  name="type" id="typePrivate">private	
-							<button id="create" type="submit">create</button>
-							
+							<button id="create" type="submit">create</button>	
 						</form>
 						<button id="cancel" type="submit">cancel</button>
-				</div>
-				<div class= "editProfile">
+			</div>
+			<div class= "editProfile">
 						<form id="editProfileForm">
 							<input type="text" value=<?php echo $userName[0]['name']; ?> placeholder=<?php echo $userName[0]['name']; ?> id="name">	
 							<input type="text" value=<?php echo $userEmail[0]['name']; ?> placeholder="Email" id="email">		
@@ -97,8 +98,7 @@
 							<button id="edit" type="submit">edit</button>
 						</form>
 						<button id="cancel" type="submit">cancel</button>
-				</div>
-			</div>
+			</div>	
 				<script src="../sweetalert-master/dist/sweetalert.min.js"></script> 
 		</body>
 	</html>

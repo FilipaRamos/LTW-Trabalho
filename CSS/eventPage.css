@@ -1,0 +1,102 @@
+body{
+	background: url("../images/holi1.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    font-family: Montserrat;
+}
+
+.nav-bar{
+     background-color: #FFC800;
+     width: 100%;
+     position: static;
+     top: 0;
+     height: 10%;
+}
+
+
+.nav-bar input#search{
+    margin-left: 10%;
+    width:20%;
+    height: 34px;
+    top:0;
+    font-family: 'Raleway', sans-serif;
+    display: table-cell; 
+}
+
+.nav-bar button#search-icon{
+    top:0;
+    height: 30px;
+    display: table-cell; 
+    overflow: hidden;
+   }
+
+.nav-bar button#logOut{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin-left: 5px;
+    top:0;
+    display: table-cell; 
+    float:right;
+    margin-right: 10%;
+}
+
+.nav-bar button#settings{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin-left: 5px;
+    top:0;
+    display: table-cell; 
+    float:right;
+}
+	
+.nav-bar button#createEvent{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin-left: 5px;
+    top:0;
+    display: table-cell; 
+    float:right;
+    
+}
+
+.nav-bar label#profile{
+    margin-left: 5px;
+    padding: 0.5%;
+    top:0;
+    display: table-cell; 
+    float:right;
+     font-family: 'Raleway', sans-serif;
+}
+
+
+
+.image-block {
+	background-color: royalblue;	
+}
+
+.editEvent {
+    position: fixed;
+    width: 40%;
+    padding: 20px;
+    background: #fff;
+    margin-right: auto;
+    margin-left: 420px;
+    margin-top:  300px;
+    top: 0px;
+}
+
+
+.editEvent input{ 
+    top: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    outline: none; 
+}

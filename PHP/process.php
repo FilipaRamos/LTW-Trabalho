@@ -9,6 +9,7 @@ function existsUser($username){
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
+
 	if(count($result) === 0){
 		return false;
 	}  
@@ -236,24 +237,24 @@ function deleteUser($idUser){
 	else return true;  
 	
 }
-function createEvent($idUser, $name, $image, $eventDate, $startHour, $description, $local, $type){
+function createEvent($idUser, $name, $image, $eventDate, $startHour, $description, $local, $partyType, $type){
 	
 	$file=new PDO('sqlite:../sqlite/database.db');
-		
-	$stmt = $file->prepare('INSERT INTO Event(name, image, eventDate, startHour, description, local, type) VALUES (:name, :image, :eventDate, :startHour, :description, :local, :type) WHERE idUser = :idUser');
+	
+	$stmt = $file->prepare('INSERT INTO Event(idUser, name, image, eventDate, startHour, description, local, partyType, type) VALUES (:idUser, :name, :image, :eventDate, :startHour, :description, :local, :partyType, :type)');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':image', $pass, PDO::PARAM_STR);
 	$stmt->bindParam(':eventDate', $eventDate, PDO::PARAM_STR);
-	$stmt->bindParam(':startHour', $startHour, PDO::PARAM_INT);
+	$stmt->bindParam(':startHour', $startHour, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
 	$stmt->bindParam(':local', $local, PDO::PARAM_STR);
+	$stmt->bindParam(':partyType', $partyType, PDO::PARAM_STR);
 	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
-	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
-	
+
 	return true;
-	
 }
 
 function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $neweventDate, $startHour, $newstartHour, 
