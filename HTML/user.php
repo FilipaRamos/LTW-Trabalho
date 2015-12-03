@@ -24,7 +24,7 @@
 			<div class="nav-bar" id="nav">
 				
 				<!--<button id="back" type="submit"><i class="fa fa-arrow-left fa-2x"></i></button>	-->
-					<input type="text" value="" placeholder="Search by name" id="search">	
+					<input id="search" type="text" value="" placeholder="Search by name">	
 					<button id="search-icon" type="submit"><i class="fa fa-search fa-2x"></i></button>
 					<button id="logOut" type="submit"><i class="fa fa-sign-out fa-2x"></i></button> </a>
 					<button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button>

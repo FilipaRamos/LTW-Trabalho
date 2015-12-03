@@ -307,13 +307,19 @@ function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $ne
 }
 
 function searchEvent($name){
-		$file=new PDO('sqlite:../sqlite/database.db');
+	$file=new PDO('sqlite:../sqlite/database.db');
 
-		$stmt = $file->prepare('SELECT * FROM Event WHERE name = :name AND type = "public"');
-		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-		$stmt->execute();
-		$result = $stmt->fetch();
-		
+	$stmt = $file->prepare('SELECT * FROM Event WHERE name = :name AND type = "public"');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	if (count($result) === 0) {
+		return false;
+	}
+	
+	return true;
+	
 }	
 
 function userEventsAdmin($idUser){

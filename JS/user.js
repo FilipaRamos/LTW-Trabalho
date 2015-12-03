@@ -5,6 +5,36 @@ $("window").ready(function () {
 			$(".createEvent").css("visibility","visible")
 	});	
 	
+	$("#nav #search-icon").click(function(ev) {
+		ev.preventDefault();
+		
+		var text = $("#nav #search").val();
+		
+		$.post(
+			'../PHP/search.php',
+			{
+				'text': text
+			},
+			
+			function (data) {
+				var resposta = data['search'];
+				
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "That event doesn't exist", "error");
+						break;
+					case 'success':
+						swal("YAY NEW Search!!");
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});	
+	});	
+	
 	$("#nav #logOut").click(function() {
 		
 			$.post(
