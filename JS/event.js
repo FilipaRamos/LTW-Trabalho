@@ -70,4 +70,35 @@ $("window").ready(function () {
 				return false;
 			});
 	});
+	
+	
+		
+	$("#nav #createEvent").click(function() {
+			$(".createEvent").css("visibility","visible")
+	});	
+	
+	$(".createEvent #cancel").click(function(){
+			$(".createEvent").css("visibility","hidden")
+	});
+	
+	$(".image-block").click(function() {
+			$(".editEvent").css("visibility","visible")
+	});	
+	
+	$(".editEvent #cancel").click(function(){
+			$(".editEvent").css("visibility","hidden")
+	});
+	
+	$(".events-card-Admin").click(function(){
+			swal("yay!!");
+			window.location.href = "eventPage.php";
+	});
+	
+	$(".events-card-Attending").click(function(e){	
+		var element = e.toElement || event.relatedTarget;
+		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
+	});
+	
+	
+	
 });

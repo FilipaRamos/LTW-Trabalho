@@ -88,10 +88,34 @@ body{
     margin-left: 420px;
     margin-top:  300px;
     top: 0px;
+    visibility: hidden;
 }
 
 
 .editEvent input{ 
+    top: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    outline: none; 
+}
+
+.createEvent {
+    position: fixed;
+    width: 40%;
+    padding: 20px;
+    background: #fff;
+    margin-right: auto;
+    margin-left: 420px;
+    margin-top:  300px;
+    top: 0px;
+    visibility: hidden;
+}
+
+
+.createEvent input{ 
     top: 0px;
     width: 100%;
     box-sizing: border-box;

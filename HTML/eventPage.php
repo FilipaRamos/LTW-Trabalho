@@ -25,7 +25,7 @@
 			 <link rel="stylesheet" type="text/css" href="../sweetalert-master/dist/sweetalert.css">
 			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 			 <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,500,600' rel='stylesheet' type='text/css'>
-			 <script src="../JS/user.js"></script>
+			 <script src="../JS/event.js"></script>
 		</head>
 		<body>
 			<div class="nav-bar" id="nav">
@@ -85,5 +85,21 @@
 				</form>
 				<button id="cancel" type="submit">cancel</button>
 			</div>
+			<div class= "createEvent">
+						<form id="createEventForm">
+							<input type="text" value="" placeholder="Name" id="name" required>					
+							<input type="file" placeholder="holi1.jpg" id="image">
+							<input type="date" value="" placeholder="Date" id="eventDate" required>					
+							<input type="time" value="" placeholder="Hour" id="startHour" required>
+							<input type="text" value="" placeholder="Description" id="description">					
+							<input type="text" value="" placeholder="Local" id="local" required>
+							<input type="text" value="" placeholder="Party type eg: party" id="partyType" required>	
+							<input type="radio"  value="public" name="type" id="typePublic" checked>public
+							<input type="radio" value="private"  name="type" id="typePrivate">private	
+							<button id="create" type="submit">create</button>	
+						</form>
+						<button id="cancel" type="submit">cancel</button>
+			</div>
 		</body>
+		<script src="../sweetalert-master/dist/sweetalert.min.js"></script> 
 	</html>

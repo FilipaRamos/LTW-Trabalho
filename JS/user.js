@@ -41,7 +41,6 @@ $("window").ready(function () {
 	
 	$(".events-card-Attending").click(function(e){	
 		var element = e.toElement || event.relatedTarget;
-		
 		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
 	});
 	
