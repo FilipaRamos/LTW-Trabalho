@@ -14,6 +14,7 @@
 		
 	$goingList = getAllGoingEvent($_GET['idEvent']);
 	 
+	 $comentarios = getComentarios($_GET['idEvent']);
 	 
 ?>
 <!DOCTYPE html>
@@ -64,10 +65,22 @@
 							echo '<p>' . $gl[0]['name'] . '</p>';
 						} 
 					?>
-				</div>
-				<div class= "comments">
-				</div>				
+				</div>		
 			</div>
+			<div class= "list-comments">
+				<h1>Comments</h1>
+					<?php 
+					foreach($comentarios as $com){
+						$name = getUserName($com['idUser']);
+						echo '<p>' . $name[0]['name'] . '</p>';
+						echo '<p>' . $com['comentario'] . '</p>';
+					}
+					?>
+					<div id= "addComment" idUser=<?php echo $idUser ?> idEvent=<?php echo $_GET['idEvent'] ?>>
+						<textarea id="comentario" rows="4" cols="50" value="" placeholder="Add a comment" autofocus></textarea>
+						<button id="add" type="submit">add</button>
+					</div>	
+				</div>		
 			<div class= "editEvent">
 				<form id="editEventForm" enctype="multipart/form-data">
 					<input type="text" value=<?php echo $event[0]['name'] ?> placeholder="Name" id="name" required>					

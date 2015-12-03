@@ -90,4 +90,17 @@ function getAllGoingEvent($idEvent){
 }
 
 
+function getComentarios($idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT * FROM Comentario WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	return $result;
+	
+}
+
+
 ?>

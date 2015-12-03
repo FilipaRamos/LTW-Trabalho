@@ -64,9 +64,9 @@ $("window").ready(function () {
 			$(".createEvent").css("visibility","hidden")
 	});
 	
-	$(".events-card-Admin").click(function(){
-			swal("yay!!");
-			window.location.href = "eventPage.php";
+	$(".events-card-Admin").click(function(e){	
+		var element = e.toElement || event.relatedTarget;
+		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
 	});
 	
 	$(".events-card-Attending").click(function(e){	

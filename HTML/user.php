@@ -39,7 +39,7 @@
 						echo '<h3> Admin </h3>';
 						echo '<div class="events-list-Admin" id="events-list-Admin">';
 						foreach($eventsAdmin as $event){
-							echo '<div class="events-card-Admin">';
+							echo '<div class="events-card-Admin" idEvent='.$event["idEvent"].'>';
 							//echo '<h3> Admin </h3>';
 							echo '<h4>' . $event["name"] . '</h4>';
 							echo '<p>' . $event["local"] . '</p>';
@@ -66,7 +66,7 @@
 						}
 						echo '</div>';
 					?>
-				</div>
+				</div>				
 			</div>
 			<div class= "createEvent">
 						<form id="createEventForm">

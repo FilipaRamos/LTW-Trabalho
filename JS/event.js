@@ -89,15 +89,42 @@ $("window").ready(function () {
 			$(".editEvent").css("visibility","hidden")
 	});
 	
-	$(".events-card-Admin").click(function(){
-			swal("yay!!");
-			window.location.href = "eventPage.php";
+	
+	$("#addComment #add").click(function(ev){
+		ev.preventDefault();
+		
+		var idUser = $('#addComment').attr('idUser');
+		var idEvent = $('#addComment').attr('idEvent');
+		var comentario = $("#addComment #comentario").val();
+		
+		
+		$.post(
+			'../PHP/comment.php',
+			{
+				'idUser': idUser,
+				'idEvent': idEvent, 
+				'comentario': comentario
+			},
+			
+			function (data) {
+				var resposta = data['comment'];
+				
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "User already exists!", "error");
+						break;
+					case 'success':
+						swal("YAY NEW COMMENT!!");
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
 	});
 	
-	$(".events-card-Attending").click(function(e){	
-		var element = e.toElement || event.relatedTarget;
-		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
-	});
 	
 	
 	

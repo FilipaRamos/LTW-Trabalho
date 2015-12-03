@@ -363,8 +363,8 @@ function userEventsAttending($idUser){
 	return $retorno;
 }
 
-function eventRelatedtoUser($idUser, $idEvent){
-	$file=new PDO('sqlite:../sqlite/database.db');
+function isAdminEvent($idUser, $idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');	
 	
 	$stmt = $file->prepare('SELECT * FROM Event WHERE idUser = :idUser');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -374,6 +374,13 @@ function eventRelatedtoUser($idUser, $idEvent){
 	if (count($result) === 0) {
 		return false;
 	}
+	
+	return true;
+}
+
+function isAttendingEvent($idUser, $idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
 	
 	$stmt = $file->prepare('SELECT * FROM AttendEvent WHERE idUser = :idUser AND idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
@@ -387,5 +394,36 @@ function eventRelatedtoUser($idUser, $idEvent){
 	
 	return true;
 }
+
+
+
+function eventRelatedtoUser($idUser, $idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	if(!(isAdminEvent($idUser, $idEvent)))
+		if(!(isAttendingEvent($idUser, $idEvent)))
+			return false;
+		else return true;
+			
+	return true;
+}
+
+function createComment($idUser, $idEvent, $comentario){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	if(!(eventRelatedtoUser($idUser, $idEvent)))
+		return false;
+	
+	$stmt = $file->prepare('INSERT INTO Comentario(idUser, idEvent, comentario) VALUES (:idUser, :idEvent, :comentario)');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam('idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':comentario', $comentario, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+	return true;
+}
+
+
 
 ?>
