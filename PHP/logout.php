@@ -1,15 +1,14 @@
 <?php 
-	include_once('process.php');
-
+	
 	session_start();
 	
 	function response($value){
-		$data = ['login' => $value];
+		$data = ['logout' => $value];
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
 	
-	$params = [ 'username', 'password'];
+	$params = [];
 	
 	foreach ($params as $param) {
 		if (isset($_POST[$param])) {
@@ -17,11 +16,21 @@
 			continue;
 		}
 	}
-	if (!(checkLogIn($params['username'], $params['password']))) {
+	
+	function logout(){
+		// remove all session variables
+		session_unset(); 
+
+		// destroy the session 
+		session_destroy(); 
+		return true;
+		
+	}
+
+	if (!(logout())) {
 		response("error");
 	}
 	else{
-		$_SESSION["username"] = $params['username'];
 		 response("success");
 	}
 

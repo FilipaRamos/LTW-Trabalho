@@ -23,7 +23,7 @@ $("window").ready(function () {
 						sweetAlert("Oops...", "User already exists!", "error");
 						break;
 					case 'success':
-						window.location.replace('user.php');
+						window.location.href = "user.php";
 						break;
 					default:
 						break;

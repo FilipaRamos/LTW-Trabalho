@@ -2,7 +2,6 @@ $("window").ready(function () {
 
 	$("#createEventForm").submit(function(ev) {
 		ev.preventDefault();
-		var idUser = getUrlParameter('idUser');
 
 		var nome = $("#createEventForm #name").val();
 		var imagem = $("#createEventForm #image").val();

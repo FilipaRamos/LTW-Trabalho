@@ -30,7 +30,7 @@
 					<a href= "log in.php"><button id="logOut" onclick="logout()" type="submit"><i class="fa fa-sign-out fa-2x"></i></button> </a>
 					<button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button>
 					<button id="createEvent" type="submit"><i class="fa fa-plus-square fa-2x"></i></button>
-					<label id="profile"><?php echo $userName[0]['name']; ?></label>	
+					<label id="profile"><?php echo $_SESSION["username"]; ?></label>	
 				<?php
 					function logout(){
 							// remove all session variables

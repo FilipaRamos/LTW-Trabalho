@@ -1,7 +1,8 @@
 <?php 
+	session_start();
+	
 	include_once('process.php');
 
-	php.ini.file_uploads = On;
 	
 	function response($value){
 		$data = ['userpage' => $value];

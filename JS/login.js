@@ -22,8 +22,7 @@ $("window").ready(function () {
 						sweetAlert("Oops...", "User or password wrong!", "error");
 						break;
 					case 'success':
-						 alert(window.sessionStorage.getItem("username"));
-						 window.location.href = "user.php?idUser=1";
+						 window.location.href = "user.php";
 						break;
 					default:
 						break;
@@ -33,6 +32,7 @@ $("window").ready(function () {
 			});
 	});
 	
+
 	
 	
 });

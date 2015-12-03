@@ -1,4 +1,6 @@
 <?php 
+	session_start();
+
 	include_once('process.php');
 
 	function response($value){
@@ -19,6 +21,7 @@
 		response("error");
 	}
 	else{
+		$_SESSION["username"] = $params['username'];
 		 response("success");
 	}
 

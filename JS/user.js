@@ -5,6 +5,31 @@ $("window").ready(function () {
 			$(".createEvent").css("visibility","visible")
 	});	
 	
+	$("#nav #logOut").click(function() {
+		
+			$.post(
+			'../PHP/logout.php',
+			{},
+			
+			function (data) {
+				var resposta = data['logout'];
+				
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "something went wrong!", "error");
+						break;
+					case 'success':
+						window.location.href = "log in.php";
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("LOG OUT FAILED!!");
+				return false;
+			});
+	});
+	
 	$(".createEvent #cancel").click(function(){
 			$(".createEvent").css("visibility","hidden")
 	});
