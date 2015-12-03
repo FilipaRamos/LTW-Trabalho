@@ -39,7 +39,7 @@
 						echo '<h3> Admin </h3>';
 						echo '<div class="events-list-Admin" id="events-list-Admin">';
 						foreach($eventsAdmin as $event){
-							echo '<div class="events-card-Admin" id="events-card-Admin">';
+							echo '<div class="events-card-Admin">';
 							//echo '<h3> Admin </h3>';
 							echo '<h4>' . $event["name"] . '</h4>';
 							echo '<p>' . $event["local"] . '</p>';
@@ -54,9 +54,9 @@
 						echo '<h3> Attending </h3>';
 						echo '<div class="events-list-Attending" id="events-list-Attending">';
 						foreach($eventsAttending as $event){
-							echo '<div class="events-card-Attending" id="events-card-Attending">';
+							echo '<div class="events-card-Attending" idEvent='.$event["idEvent"].'>';
 							//echo '<h3> Attending </h3>';
-							echo '<h4>' . $event["name"] . '</h4>';
+							echo '<h4>'. $event["name"] . '</h4>';
 							echo '<p>' . $event["local"] . '</p>';
 							echo '<p>' . $event["eventDate"] . ' ' . $event["startHour"] . '</p>';
 							echo '<p>' . $event["type"] . '</p>';

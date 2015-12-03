@@ -1,14 +1,20 @@
 <?php
+	session_start();
 	 include_once('../PHP/process.php');
 	 include_once('../PHP/getSet.php');
-	 $userName = getUserName($_GET['idUser']);
+	 
+	 $idUser = getidUSer($_SESSION["username"])[0]['idUser'];
 	 $event = getEvent($_GET['idEvent']);
-	 $eventHost = getUserName(getEventHost($_GET['idEvent'])[0]['idUser']);
-	  if (count (getAttendState($_GET['idEvent'],$_GET['idUser'])) === 0) {
-		 $eventAttend = "";
-	  } else   $eventAttend = getAttendState($_GET['idEvent'],$_GET['idUser'])[0]['attend'];
-	  
-	 $goingList = getAllGoingEvent($_GET['idEvent']);
+	 
+	 
+	$eventHost = getUserName(getEventHost($_GET['idEvent'])[0]['idUser']);
+	if (count (getAttendState($_GET['idEvent'],$idUser)) === 0) {
+			$eventAttend = "";
+	} else   $eventAttend = getAttendState($_GET['idEvent'],$idUser)[0]['attend'];
+		
+	$goingList = getAllGoingEvent($_GET['idEvent']);
+	 
+	 
 ?>
 <!DOCTYPE html>
 	<html>
@@ -27,20 +33,11 @@
 				<!--<button id="back" type="submit"><i class="fa fa-arrow-left fa-2x"></i></button>	-->
 					<input type="text" value="" placeholder="Search by name" id="search">	
 					<button id="search-icon" type="submit"><i class="fa fa-search fa-2x"></i></button>
-					<a href= "log in.php"><button id="logOut" onclick="logout()" type="submit"><i class="fa fa-sign-out fa-2x"></i></button> </a>
+					<button id="logOut"  type="submit"><i class="fa fa-sign-out fa-2x"></i></button> </a>
 					<button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button>
 					<button id="createEvent" type="submit"><i class="fa fa-plus-square fa-2x"></i></button>
 					<label id="profile"><?php echo $_SESSION["username"]; ?></label>	
-				<?php
-					function logout(){
-							// remove all session variables
-							session_unset(); 
-		
-							// destroy the session 
-							session_destroy(); 
-								echo 'pintou';
-					}
-				?>
+					
 			</div>
 			<div class= "image-block">
 				<h1><?php echo $event[0]['name'] ?></h1>

@@ -316,7 +316,6 @@ function searchEvent($name){
 		
 }	
 
-
 function userEventsAdmin($idUser){
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
@@ -358,6 +357,29 @@ function userEventsAttending($idUser){
 	return $retorno;
 }
 
-
+function eventRelatedtoUser($idUser, $event){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT * FROM Event WHERE idUser = :idUser');
+	$stmt->bindParam(':idUser', $row['idUser'], PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	if (count($result) === 0) {
+		return false;
+	}
+	
+	$stmt = $file->prepare('SELECT * FROM AttendEvent WHERE idUser = :idUser AND idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
+	$stmt->bindParam(':idUser', $row['idUser'], PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	if (count($result) === 0) {
+		return false;
+	}
+	
+	return true;
+}
 
 ?>

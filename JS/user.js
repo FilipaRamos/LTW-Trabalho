@@ -36,11 +36,13 @@ $("window").ready(function () {
 	
 	$(".events-card-Admin").click(function(){
 			swal("yay!!");
-			window.location.href = "eventPage.php" + window.location.search;
+			window.location.href = "eventPage.php";
 	});
 	
-	$(".events-card-Attending").click(function(){
-			swal("NO!!");
+	$(".events-card-Attending").click(function(e){	
+		var element = e.toElement || event.relatedTarget;
+		
+		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
 	});
 	
 	
