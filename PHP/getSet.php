@@ -48,6 +48,7 @@ function getEvent($idEvent){
 	
 }
 
+
 function getEventHost($idEvent){
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
@@ -76,7 +77,7 @@ function getAttendState($idEvent, $idUser){
 function getAllGoingEvent($idEvent){
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
-	$stmt = $file->prepare('SELECT idUser FROM AttendEvent WHERE idEvent = :idEvent');
+	$stmt = $file->prepare('SELECT idUser FROM AttendEvent WHERE idEvent = :idEvent AND attend = 1');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
@@ -87,6 +88,30 @@ function getAllGoingEvent($idEvent){
 		array_push($resultado, $res);
 	}
 	return $resultado;
+}
+
+function getInvitedEvents($idUSer){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT idEvent FROM AttendEvent WHERE idUser = :idUser AND attend = -1');
+	$stmt->bindParam(':idUser', $idUSer, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	$retorno = array();
+	
+	foreach($result as $row) {
+		$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent');
+		$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
+		$stmt->execute();
+		$resultado = $stmt->fetchAll();
+		
+		foreach($resultado as $r) {
+			array_push($retorno, $r);
+		}
+	}
+	
+	return $retorno;
 }
 
 
@@ -101,6 +126,8 @@ function getComentarios($idEvent){
 	return $result;
 	
 }
+
+
 
 
 ?>

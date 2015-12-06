@@ -1,5 +1,6 @@
 <?php 
 	include_once('process.php');
+	include_once('getSet.php');
 
 	session_start();
 	
@@ -22,6 +23,8 @@
 	}
 	else{
 		$_SESSION["username"] = $params['username'];
+		$_SESSION["idUser"] = getidUSer($params['username'])[0]['idUser'];
+		$_SESSION["name"] = getUserName($_SESSION["idUser"])[0]['name'];
 		 response("success");
 	}
 

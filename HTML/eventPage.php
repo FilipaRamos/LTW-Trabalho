@@ -3,8 +3,12 @@
 	 include_once('../PHP/process.php');
 	 include_once('../PHP/getSet.php');
 	 
-	 $idUser = getidUSer($_SESSION["username"])[0]['idUser'];
+	 $idUser = $_SESSION["idUser"];
 	 $event = getEvent($_GET['idEvent']);
+	 
+	 if(!eventRelatedtoUser($idUser, $_GET['idEvent'])){
+	 	header("Location: error.php");
+	 }
 	 
 	 
 	$eventHost = getUserName(getEventHost($_GET['idEvent'])[0]['idUser']);
@@ -14,7 +18,10 @@
 		
 	$goingList = getAllGoingEvent($_GET['idEvent']);
 	 
-	 $comentarios = getComentarios($_GET['idEvent']);
+	$comentarios = getComentarios($_GET['idEvent']);
+	
+	$inviteList = getInviteList($_GET['idEvent']);
+
 	 
 ?>
 <!DOCTYPE html>
@@ -32,15 +39,24 @@
 			<div class="nav-bar" id="nav">
 				
 				<!--<button id="back" type="submit"><i class="fa fa-arrow-left fa-2x"></i></button>	-->
-					<input type="text" value="" placeholder="Search by name" id="search">	
+					<input type="text" value="" placeholder="Search by name" id="search">
 					<button id="search-icon" type="submit"><i class="fa fa-search fa-2x"></i></button>
 					<button id="logOut"  type="submit"><i class="fa fa-sign-out fa-2x"></i></button> </a>
 					<button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button>
 					<button id="createEvent" type="submit"><i class="fa fa-plus-square fa-2x"></i></button>
-					<label id="profile"><?php echo $_SESSION["username"]; ?></label>	
+					<label id="profile"><?php echo $_SESSION["name"]; ?></label>	
+					<div class="hiddenDiv"><?php echo $_SESSION["name"]; ?></div>
 					
 			</div>
 			<div class= "image-block">
+				
+				<button id="inviteMail"><i class="fa fa-envelope fa-4x"></i></i></button>
+				<div class="hiddenDivEvent"><?php echo $_GET['idEvent']?></div> 
+				<?php 
+					if(isAdminEvent($idUser, $event))
+						echo '<button id="deleteEvent"><i class="fa fa-trash fa-4x"></i></button>';
+				
+				?>
 				<h1><?php echo $event[0]['name'] ?></h1>
 				<div id= "type-host-attend">
 					<?php 
@@ -75,13 +91,13 @@
 						echo '<p>' . $name[0]['name'] . '</p>';
 						echo '<p>' . $com['comentario'] . '</p>';
 					}
-					?>
-					<div id= "addComment" idUser=<?php echo $idUser ?> idEvent=<?php echo $_GET['idEvent'] ?>>
+				?>					
+			</div>	
+				<div id= "addComment" idUser=<?php echo $idUser ?> idEvent=<?php echo $_GET['idEvent'] ?>>
 						<textarea id="comentario" rows="4" cols="50" value="" placeholder="Add a comment" autofocus></textarea>
 						<button id="add" type="submit">add</button>
-					</div>	
-				</div>		
-			<div class= "editEvent">
+				</div>	
+			<!--<div class= "editEvent">
 				<form id="editEventForm" enctype="multipart/form-data">
 					<input type="text" value=<?php echo $event[0]['name'] ?> placeholder="Name" id="name" required>					
 					<input type="file" name="fileToUpload" value=<?php echo $event[0]['image'] ?> placeholder="file" id="image">
@@ -112,7 +128,20 @@
 							<button id="create" type="submit">create</button>	
 						</form>
 						<button id="cancel" type="submit">cancel</button>
+			</div>-->
+			<div class="invite-list">
+				<form id="inviteEventForm">
+				<?php 
+					foreach($inviteList as $inv){
+						echo '<div class="hiddenDividUser">' . $inv['idUser'] . '</div>';			
+						echo '<label><p>' . $inv['username'] . '</p></label>';
+						echo '<button id="inviteIcon"><i class="fa fa-user-plus"></i></button>';
+					}
+				?>
+				<button id="invite" type="submit">invite</button>	
+				</form>
 			</div>
+			
 		</body>
 		<script src="../sweetalert-master/dist/sweetalert.min.js"></script> 
 	</html>

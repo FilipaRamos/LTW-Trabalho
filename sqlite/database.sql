@@ -1,4 +1,5 @@
 --BASE DE DADOS DE UMA APLICAÇÃO QUE GERE EVENTOS
+PRAGMA foreign_keys=ON; 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Event;
 DROP TABLE IF EXISTS AttendEvent;
@@ -34,24 +35,24 @@ CREATE TABLE Event(
 CREATE TABLE AttendEvent(
 	idEvent INTEGER,
 	idUser INTEGER,
-	attend NVARCHAR2(20),
+	attend INTEGER,
 	PRIMARY KEY (idEvent, idUser),
 	FOREIGN KEY (idEvent) REFERENCES Event(idEvent) ON DELETE CASCADE,
 	FOREIGN KEY (idUser) REFERENCES User(idUser) ON DELETE CASCADE,
-	CHECK (attend = 'yes' OR attend = 'no')
+	CHECK (attend = 0 OR attend = 1 OR attend = -1)
 );
 
 CREATE TABLE Comentario(
 	idComentario INTEGER PRIMARY KEY,
-	idUser INTEGER REFERENCES User(idUser),
-	idEvent INTEGER REFERENCES Event(idEvent),
+	idUser INTEGER REFERENCES User(idUser) ON DELETE CASCADE,
+	idEvent INTEGER REFERENCES Event(idEvent) ON DELETE CASCADE,
 	comentario NVARCHAR2(200)
 );
 
 
 CREATE TRIGGER AttendAuto AFTER INSERT ON Event FOR EACH ROW
 BEGIN
-INSERT INTO AttendEvent VALUES(New.idEvent,New.idUser,"yes");
+INSERT INTO AttendEvent VALUES(New.idEvent,New.idUser, 1);
 END;
 
-	
+.read insert.sql

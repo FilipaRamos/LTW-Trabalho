@@ -1,28 +1,29 @@
 <?php 
-	include_once('process.php');
-
 	session_start();
 	
+	include_once('process.php');
+
+	
 	function response($value){
-		$data = ['comment' => $value];
+		$data = ['delete' => $value];
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
 	
-	$params = [ 'idUser', 'idEvent', 'comentario'];
-	
+	$params = ['idEvent'];
+
+
 	foreach ($params as $param) {
 		if (isset($_POST[$param])) {
 			$params[$param] = $_POST[$param];
 			continue;
 		}
 	}
-	if (!(addComment($params["idUser"], $params["idEvent"], $params["comentario"]))) {
+	
+	if (!(deleteEvent($params['idEvent']))) {
 		response("error");
 	}
 	else{
 		 response("success");
 	}
-
-	
 ?>

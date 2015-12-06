@@ -2,6 +2,7 @@
 	session_start();
 
 	include_once('process.php');
+	include_once('getSet.php');
 
 	function response($value){
 		$data = ['register' => $value];
@@ -22,6 +23,8 @@
 	}
 	else{
 		$_SESSION["username"] = $params['username'];
+		$_SESSION["idUser"] = getidUSer($params['username'])[0]['idUser'];
+		$_SESSION["name"] = getUserName($_SESSION["idUser"])[0]['name'];
 		 response("success");
 	}
 

@@ -1,24 +1,24 @@
 $("window").ready(function () {
-	
-	
-	$("#nav #createEvent").click(function() {
-			$(".createEvent").css("visibility","visible")
-	});	
-	
-	$("#nav #search-icon").click(function(ev) {
+
+
+	$("#nav #createEvent").click(function () {
+		$(".createEvent").css("visibility", "visible")
+	});
+
+	$("#nav #search-icon").click(function (ev) {
 		ev.preventDefault();
-		
+
 		var text = $("#nav #search").val();
-		
+
 		$.post(
 			'../PHP/search.php',
 			{
 				'text': text
 			},
-			
+
 			function (data) {
 				var resposta = data['search'];
-				
+
 				switch (resposta) {
 					case 'error':
 						swal("Oops...", "That event doesn't exist", "error");
@@ -32,18 +32,18 @@ $("window").ready(function () {
 			}).fail(function (error) {
 				swal("FAILED!!");
 				return false;
-			});	
-	});	
-	
-	$("#nav #logOut").click(function() {
-		
-			$.post(
+			});
+	});
+
+	$("#nav #logOut").click(function () {
+
+		$.post(
 			'../PHP/logout.php',
 			{},
-			
+
 			function (data) {
 				var resposta = data['logout'];
-				
+
 				switch (resposta) {
 					case 'error':
 						swal("Oops...", "something went wrong!", "error");
@@ -59,78 +59,30 @@ $("window").ready(function () {
 				return false;
 			});
 	});
-	
-	$(".createEvent #cancel").click(function(){
-			$(".createEvent").css("visibility","hidden")
+
+	$(".createEvent #cancel").click(function () {
+		$(".createEvent").css("visibility", "hidden")
 	});
-	
-	$(".events-card-Admin").click(function(e){	
-		var element = e.toElement || event.relatedTarget;
-		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
-	});
-	
-	$(".events-card-Attending").click(function(e){	
-		var element = e.toElement || event.relatedTarget;
-		window.location.href = "eventPage.php?idEvent=" + element.getAttribute("idEvent");
-	});
-	
-	
-/*
-	FUNCAO DA NET!!!
-*/	
-	var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-	
-};	
+	$(".events-card-interesting #registerEvent").click(function (e) {
 
-	$("#createEventForm").submit(function(ev) {
-		ev.preventDefault();
-		var idUser = getUrlParameter('idUser');
-
-		var nome = $("#createEventForm #name").val();
-		var imagem = $("#createEventForm #image").val();
-		var eventDate = $("#createEventForm #eventDate").val();
-		var eventHour =  $("#createEventForm #startHour").val();
-		var descricao =  $("#createEventForm #description").val();
-		var local =  $("#createEventForm #local").val();
-		var tipo =  $("#createEventForm").find("input[type='radio'][name='type']:checked").val();
-		var partyType =  $("#createEventForm #partyType").val();
-		
+		var idEvent = $(".hiddenDiv").html();
 		$.post(
-			'../PHP/userPage.php',
+			'../PHP/registerEvent.php',
 			{
-				'idUser': idUser,
-				'name': nome,
-				'image': imagem,
-				'eventDate' : eventDate,
-				'startHour' : eventHour,
-				'description' : descricao,
-				'local' : local,
-				'partyType' : partyType,
-				'type' : tipo
+				'idEvent': idEvent
 			},
-			
+
 			function (data) {
-				var resposta = data['userpage'];
-				
+				var resposta = data['register'];
+
 				switch (resposta) {
 					case 'error':
-						swal("Oops...", "User already exists!", "error");
+						swal("Oops...", "Already registed!", "error");
 						break;
 					case 'success':
-						swal("YAY NEW EVENT!!");
-						$(".createEvent").css("visibility","hidden");
+						swal("Registed");
 						break;
 					default:
 						break;
@@ -139,9 +91,134 @@ $("window").ready(function () {
 				swal("FAILED!!");
 				return false;
 			});
-	});	
+	});
+
+
+	$("#background-block").on("click", "#name", function (e) {
+		e.preventDefault();
+		var idEvent = $(".hiddenDiv").html();
+
+		window.location.href = "eventPage.php?idEvent=" + idEvent;
+	});
+
+	$("#background-block #interestingEvents").click(function () {
+
+		$.post(
+			'../PHP/decide.php',
+			{
+				'option': "interesting"
+			},
+
+			function (data) {
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+
+	});
+
+	$("#background-block #AdminEvents").click(function () {
+
+		$.post(
+			'../PHP/decide.php',
+			{
+				'option': "admin"
+			},
+
+			function (data) {
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+
+	});
+
+	$("#background-block #AttendingEvents").click(function () {
+
+		$.post(
+			'../PHP/decide.php',
+			{
+				'option': "attending"
+			},
+
+			function (data) {
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+
+	});
 	
-	$("#editProfileForm").submit(function(ev) {
+	$("#background-block #InvitedEvents").click(function () {
+
+		$.post(
+			'../PHP/decide.php',
+			{
+				'option': "invited"
+			},
+
+			function (data) {
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+
+	});
+	
+	/*
+		FUNCAO DA NET!!!
+	*/
+	var getUrlParameter = function getUrlParameter(sParam) {
+		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+			sURLVariables = sPageURL.split('&'),
+			sParameterName,
+			i;
+
+		for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === sParam) {
+				return sParameterName[1] === undefined ? true : sParameterName[1];
+			}
+		}
+
+	};
+
+	$("#createEventForm").submit(function (ev) {
+		ev.preventDefault();
+				
+		 formData = new FormData(this);
+        
+	$.ajax({
+            type: "POST",
+            url: "../PHP/userPage.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+				console.log(response);
+                var data=JSON.parse(response);
+                if(data["fileuload"]!="success"){
+                  console.log(data["fileupload"]); 
+           
+                }
+            },
+            error: function(errResponse) {
+                console.log(errResponse);
+            },
+            complete: function() 
+            {
+                location.reload();
+            }
+        });
+		
+	});
+
+	$("#editProfileForm").submit(function (ev) {
 		ev.preventDefault();
 		var idUser = getUrlParameter('idUser');
 
@@ -149,27 +226,27 @@ $("window").ready(function () {
 		var nome = $("#editProfileForm #name").val();
 		var password = $("#editProfileForm #password").val();
 		var newpassword = $("#editProfileForm #newpassword").val();
-		
+
 		$.post(
 			'../PHP/userPage.php',
 			{
 				'idUser': idUser,
 				'name': nome,
 				'password': newpassword,
-				
-				
+
+
 			},
-			
+
 			function (data) {
 				var resposta = data['createUser'];
-				
+
 				switch (resposta) {
 					case 'error':
 						swal("Oops...", "User already exists!", "error");
 						break;
 					case 'success':
 						swal("YAY NEW EVENT!!");
-						$("#createEventForm").css("visibility","hiden");
+						$("#createEventForm").css("visibility", "hiden");
 						location.reload();
 						break;
 					default:
@@ -178,7 +255,55 @@ $("window").ready(function () {
 			}).fail(function (error) {
 				return false;
 			});
-	});	
+	});
+
+	$("#nav #search").bind('keypress', function (e) {
+		var code = e.keyCode || e.which;
+		if (code == 13) {
+			var text = $('#nav #search').val();
+			$.post(
+				'../PHP/search.php',
+				{
+					'text': text
+				},
+
+			function (data) {
+				console.log(data);
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+		}
+	});
+
+	$("#search-icon").click(function (ev) {
+		ev.preventDefault();
+		var text = $('#nav #search').val();
+		$.post(
+			'../PHP/search.php',
+			{
+				'text': text
+			},
+
+			function (data) {
+				var resposta = data['search'];
+
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "something went wrong!", "error");
+						break;
+					case 'success':
+						swal("Success searching...");
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("LOG OUT FAILED!!");
+				return false;
+			});
+	});
 
 
 });

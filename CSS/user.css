@@ -108,6 +108,32 @@ body{
     padding-left: 3%;
 }
 
+.events-card-interesting{
+    background-color: #DAAC05;
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5%;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-left: 3%;
+    
+}
+
+.events-card-Invited{
+    background-color: #DAAC05;
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5%;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-left: 3%;
+    
+}
+
 .event-block h3{
     text-align: left;
     font-size: 30px;
@@ -129,6 +155,34 @@ body{
     font-family: 'Raleway', sans-serif;
     font-style: normal; 
 }
+.events-card-Interesting h4{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
+.events-card-Invited h4{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
+.events-card-Invited p{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
+.events-card-Interesting p{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
 
 .events-card-Admin p{
     text-align: left;
@@ -190,3 +244,28 @@ body{
     font-family: 'Raleway', sans-serif;
     outline: none; 
 }
+
+.createEvent {
+    position: fixed;
+    width: 40%;
+    padding: 20px;
+    background: #fff;
+    margin-right: auto;
+    margin-left: 420px;
+    margin-top:  300px;
+    top: 0px;
+    visibility: hidden;
+}
+
+
+.createEvent input{ 
+    top: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    outline: none; 
+}
+
+

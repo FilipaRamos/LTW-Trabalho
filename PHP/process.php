@@ -172,29 +172,19 @@ function deleteEvent($idEvent){
 	$stmt = $file->prepare('DELETE FROM AttendEvent WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
-	$result = $stmt->fetchAll();
-
-	if(!$result)
-		return false;
-	else return true;  
+	$result = $stmt->fetchAll(); 
 	
 	$stmt = $file->prepare('DELETE FROM Comentario WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
-	$result = $stmt->fetchAll();
-
-	if(!$result)
-		return false;
-	else return true;  		
+	$result = $stmt->fetchAll();	
 
 	$stmt = $file->prepare('DELETE FROM Event WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 
-	if(!$result)
-		return false;
-	else return true;
+	return true;
 }
 
 function deleteUser($idUser){
@@ -237,6 +227,7 @@ function deleteUser($idUser){
 	else return true;  
 	
 }
+
 function createEvent($idUser, $name, $image, $eventDate, $startHour, $description, $local, $partyType, $type){
 	
 	$file=new PDO('sqlite:../sqlite/database.db');
@@ -244,7 +235,7 @@ function createEvent($idUser, $name, $image, $eventDate, $startHour, $descriptio
 	$stmt = $file->prepare('INSERT INTO Event(idUser, name, image, eventDate, startHour, description, local, partyType, type) VALUES (:idUser, :name, :image, :eventDate, :startHour, :description, :local, :partyType, :type)');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-	$stmt->bindParam(':image', $pass, PDO::PARAM_STR);
+	$stmt->bindParam(':image', $image, PDO::PARAM_STR);
 	$stmt->bindParam(':eventDate', $eventDate, PDO::PARAM_STR);
 	$stmt->bindParam(':startHour', $startHour, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
@@ -252,9 +243,9 @@ function createEvent($idUser, $name, $image, $eventDate, $startHour, $descriptio
 	$stmt->bindParam(':partyType', $partyType, PDO::PARAM_STR);
 	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
 	$stmt->execute();
-	$result = $stmt->fetchAll();
+	$result = $stmt->lastInsertId();
 
-	return true;
+	return $result;
 }
 
 function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $neweventDate, $startHour, $newstartHour, 
@@ -314,11 +305,7 @@ function searchEvent($name){
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	
-	if (count($result) === 0) {
-		return false;
-	}
-	
-	return true;
+	return $result;
 	
 }	
 
@@ -342,7 +329,7 @@ function userEventsAdmin($idUser){
 function userEventsAttending($idUser){
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
-	$stmt = $file->prepare('SELECT idEvent FROM AttendEvent WHERE idUser = :idUser');
+	$stmt = $file->prepare('SELECT idEvent FROM AttendEvent WHERE idUser = :idUser AND attend = 1');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
@@ -350,8 +337,9 @@ function userEventsAttending($idUser){
 	$retorno = array();
 	
 	foreach($result as $row) {
-		$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent');
+		$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent AND idUser <> :idUser');
 		$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
+		$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 		$stmt->execute();
 		$resultado = $stmt->fetchAll();
 		
@@ -408,7 +396,7 @@ function eventRelatedtoUser($idUser, $idEvent){
 	return true;
 }
 
-function createComment($idUser, $idEvent, $comentario){
+function addComment($idUser, $idEvent, $comentario){
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
 	if(!(eventRelatedtoUser($idUser, $idEvent)))
@@ -424,6 +412,100 @@ function createComment($idUser, $idEvent, $comentario){
 	return true;
 }
 
+function userCanRegister($idUser){
+	$file=new PDO('sqlite:../sqlite/database.db');
 
+	$retorno = array();
+	
+	$stmt = $file->prepare('select idEvent from Event where idEvent Not in ( select attendEvent.idEvent from AttendEvent where idUser = :idUser)');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	foreach($result as $row) {
+		$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent AND type = "public"');
+		$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
+		$stmt->execute();
+		$resultado = $stmt->fetchAll();
+		
+		foreach($resultado as $r) {
+			array_push($retorno, $r);
+		}
+	}
+	
+	return $retorno;
+}
+
+function registed($idEvent, $idUser){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT * FROM AttendEvent WHERE idUser = :idUser AND  idEvent = :idEvent ;');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+	if(count($result) === 0){
+		return false;
+	}  
+	return true;
+}
+
+
+function registerEvent($idEvent, $idUser){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	if(registed($idEvent, $idUser)){
+		return false;
+	}
+	
+	$stmt = $file->prepare('SELECT * FROM Event WHERE idEvent = :idEvent AND type = "public"');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	
+	if (count($result) === 0) {
+		return false;
+	}
+	
+	$attend = 1;
+	$stmt = $file->prepare('INSERT INTO AttendEvent(idEvent, idUser, attend) VALUES (:idEvent, :idUser, :attend)');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':attend', $attend, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+	return true;
+}
+
+function getInviteList($idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$stmt = $file->prepare('SELECT DISTINCT User.* FROM User,Event WHERE User.idUser <> Event.idUser AND 
+	User.idUser NOT IN(SELECT idUser FROM AttendEvent WHERE idEvent=:idEvent)');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+
+	return $result;
+}
+
+function invite($idUser, $idEvent){
+	$file=new PDO('sqlite:../sqlite/database.db');
+	
+	$attend = -1;
+	$stmt = $file->prepare('INSERT INTO AttendEvent(idEvent, idUser, attend) VALUES (:idEvent, :idUser, :attend)');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':attend', $attend, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+	return true;
+	
+	
+}
 
 ?>

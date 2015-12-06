@@ -46,6 +46,64 @@ $("window").ready(function () {
 			});
 	});	
 	
+	$("#nav #search").bind('keypress',function(e){
+		var code = e.keyCode || e.which;
+ 	if(code == 13) { 
+		var text = $('#nav #search').val();
+		$.post(
+			'../PHP/search.php',
+			{
+				'text' : text
+			},
+			
+			function (data) {
+				var resposta = data['search'];
+				
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "something went wrong!", "error");
+						break;
+					case 'success':
+						swal("Success searching...");
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("SEARCH FAILED!!");
+				return false;
+			});
+		}
+	});
+	
+	$("#search-icon").click(function(ev){
+		ev.preventDefault();
+		var text = $('#nav #search').val();
+		$.post(
+			'../PHP/search.php',
+			{
+				'text' : text
+			},
+			
+			function (data) {
+				var resposta = data['search'];
+				
+				switch (resposta) {
+					case 'error':
+						swal("Oops...", "something went wrong!", "error");
+						break;
+					case 'success':
+						swal("Success searching...");
+						break;
+					default:
+						break;
+				}
+			}).fail(function (error) {
+				swal("SEARCH FAILED!!");
+				return false;
+			});
+	});
+	
 	$("#nav #logOut").click(function() {
 		
 			$.post(
@@ -70,23 +128,21 @@ $("window").ready(function () {
 				return false;
 			});
 	});
-	
-	
 		
 	$("#nav #createEvent").click(function() {
-			$(".createEvent").css("visibility","visible")
+			$(".createEvent").css("visibility","visible");
 	});	
 	
 	$(".createEvent #cancel").click(function(){
-			$(".createEvent").css("visibility","hidden")
+			$(".createEvent").css("visibility","hidden");
 	});
 	
 	$(".image-block").click(function() {
-			$(".editEvent").css("visibility","visible")
+			$(".editEvent").css("visibility","visible");
 	});	
 	
 	$(".editEvent #cancel").click(function(){
-			$(".editEvent").css("visibility","hidden")
+			$(".editEvent").css("visibility","hidden");
 	});
 	
 	
@@ -96,13 +152,13 @@ $("window").ready(function () {
 		var idUser = $('#addComment').attr('idUser');
 		var idEvent = $('#addComment').attr('idEvent');
 		var comentario = $("#addComment #comentario").val();
-		
+		var nome = $("#nav .hiddenDiv").html();
 		
 		$.post(
 			'../PHP/comment.php',
 			{
 				'idUser': idUser,
-				'idEvent': idEvent, 
+				'idEvent': idEvent,
 				'comentario': comentario
 			},
 			
@@ -114,7 +170,11 @@ $("window").ready(function () {
 						swal("Oops...", "User already exists!", "error");
 						break;
 					case 'success':
-						swal("YAY NEW COMMENT!!");
+						$( ".list-comments" ).append(
+												"<p>" +  nome + "</p>" +
+												"<p>" +  comentario + "</p>"
+													);
+						$("#addComment #comentario").val("");
 						break;
 					default:
 						break;
@@ -126,6 +186,94 @@ $("window").ready(function () {
 	});
 	
 	
+	$(".image-block #deleteEvent").click(function(ev){
+		ev.preventDefault();
+		
+		swal({  title: "Are you sure?",   
+				text: "You will not be able to recover this event!",  
+		 		type: "warning",   
+		 		showCancelButton: true,   confirmButtonColor: "#DD6B55",  
+		  		confirmButtonText: "Yes, delete it!",  
+		   		closeOnConfirm: false 
+			 }, function(){ 
+				 
+		
+		
+		var idEvent = $(".hiddenDivEvent").html();
+		
+				$.post(
+					'../PHP/deleteEvent.php',
+					{
+						'idEvent': idEvent
+					},
+					
+					function (data) {
+						var resposta = data['delete'];
+						
+						switch (resposta) {
+							case 'error':
+								swal("Oops...", "Something went wrong!", "error");
+								break;
+							case 'success':
+								break;
+							default:
+								break;
+						}
+					}).fail(function (error) {
+						swal("Oops...", "Something went wrong!", "error");
+						return false;
+					});
+				
+				swal("Deleted!", "Your Event has been deleted.", "success"); 
+				
+				window.location.href ="user.php";
+			});
+			
+	});
 	
 	
+	$(".invite-list #inviteIcon").click(function(ev){
+		ev.preventDefault();
+		
+		var idEvent = $(".hiddenDivEvent").html();
+		var idUser = $(".hiddenDividUser").html();
+		
+		$.post(
+			'../PHP/invite.php',
+			{
+				'idEvent': idEvent,
+				'idUser': idUser
+			},
+			
+			function (data) {
+				var resposta = data['invite'];
+				switch (resposta) {
+					case 'error':
+						swal("Oops...This is embarrassing", "You're already registed!", "error");
+						break;
+					default:
+						$(".invite-list").replaceWith(data);
+						break;
+				}
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+	});
+	
+
+	$(".image-block #inviteMail").click(function(){
+		
+		$(".invite-list").css("visibility","visible");	
+		
+	});
+	
+	$(".invite-list #invite").click(function(ev){
+		ev.preventDefault();
+		
+		$(".invite-list").css("visibility","hidden");	
+		
+	});
+
+
 });
