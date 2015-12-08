@@ -24,28 +24,39 @@
 		</head>
 		<body>
 			<div class="nav-bar" id="nav">
-				<!--<button id="back" type="submit"><i class="fa fa-arrow-left fa-2x"></i></button>	-->
-					<input id="search" type="text" value="" placeholder="Search by name">	
-					<button id="search-icon" type="submit"><i class="fa fa-search fa-2x"></i></button>
-					<button id="logOut" type="submit"><i class="fa fa-sign-out fa-2x"></i></button>
-					<button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button>
-					<button id="createEvent" type="submit"><i class="fa fa-plus-square fa-2x"></i></button>
-					<label id="profile"><?php echo ($_SESSION["name"]); ?></label>
+				<div class="innerNav">
+					<ul class="nav-horizontal-bar" id="elemsRight">
+						<li class="li-hor"><label id="profile"><?php echo ($_SESSION["name"]); ?></label></li>
+						<li class="li-hor"><button id="createEvent" type="submit"><i class="fa fa-plus-square fa-2x"></i></button></li>
+						<li class="li-hor"><button id="settings" type="submit"><i class="fa fa-cog fa-fw fa-2x"></i></button></li>
+						<li class="li-hor"><button id="logOut" type="submit"><i class="fa fa-sign-out fa-2x"></i></button></li>
+					</ul>
+					<ul class="nav-horizontal-bar" id="elemsLeft">
+						<li class="li-hor"><button id="home" type="submit"><i class="fa fa-home fa-2x"></i></button></li>
+						<li class="li-hor"><input id="search" type="text" value="" placeholder="Search by name"></li>	
+						<li class="li-hor"><button id="search-icon" type="submit"><i class="fa fa-search fa-2x"></i></button></li>
+					</ul>
+				</div>
 			</div>
 			<div id="background-block">
-				<button id="interestingEvents">Interesting Events</button>
-				<button id="AdminEvents">Admin Events</button>
-				<button id="AttendingEvents">Attending Events</button>
-				<button id="InvitedEvents">Invited Events</button>
+				
+				<div class="innerNav2">
+					<ul class="nav-horizontal-bar2">
+						<li class="li-hor"><button id="interestingEvents">Interesting Events</button></li>
+						<li class="li-hor"><button id="AdminEvents">Admin Events</button></li>
+						<li class="li-hor"><button id="AttendingEvents">Attending Events</button></li>
+						<li class="li-hor"><button id="InvitedEvents">Invited Events</button></li>
+					</ul>
+				</div>
 				<div class="event-block" id= "event-block">
 					<?php
-					echo '<h3> Interesting Events </h3>';
-					echo '<div class="events-list" id="events-list">';			
+					echo '<div class="events-list-Interesting" id="events-list-Interesting">';		
+					echo '<label class="event-block-h3"> Interesting Events </label>';	
 						foreach($eventsInteresting as $event){
 							echo '<div class="hiddenDiv">'. $event['idEvent'] . '</div>'; 
-							echo '<div class="events-card-interesting" >';
+							echo '<div class="events-card" >';
 							echo '<button id="registerEvent" type="submit"><i class="fa fa-calendar-check-o fa-4x"></i></button>';
-							echo '<h4 id="name">' . $event["name"] . '</h4>';
+							echo '<h4 id="nameEvent">' . $event["name"] . '</h4>';
 							echo '<p><i class="fa fa-location-arrow"></i>' . $event["local"] . '</p>';
 							echo '<p><i class="fa fa-calendar"></i>'. ' ' . $event["eventDate"] . '  ' . '<i class="fa fa-clock-o"></i>' .' ' .$event["startHour"] . '</p>';
 							echo '<p>' . $event["type"] . '</p>';
@@ -57,17 +68,17 @@
 				?>
 				</div>				
 			</div>
-			<div class= "createEvent">
-				<form id="createEventForm" enctype="multipart/form-data">
-					<input type="text" value="" placeholder="Name" id="name" required>	
+			<div class= "createEvent" id="createEvent">
+				<form id="createEventForm" method="post" enctype="multipart/form-data">
+					<input type="text" value="" placeholder="Name" id="name" name="name" required>	
 					<input type="file" name="image" id="image">
-					<input type="date" value="" placeholder="Date" id="eventDate" required>					
-					<input type="time" value="" placeholder="Hour" id="startHour" required>
-					<input type="text" value="" placeholder="Description" id="description">					
-					<input type="text" value="" placeholder="Local" id="local" required>
-					<input type="text" value="" placeholder="Party type eg: party" id="partyType" required>	
-					<input type="radio"  value="public" name="type" id="typePublic" checked>public
-					<input type="radio" value="private"  name="type" id="typePrivate">private	
+					<input type="date" value="" placeholder="Date" id="eventDate" name="eventDate" required>					
+					<input type="time" value="" placeholder="Hour" id="startHour" name="startHour" required>
+					<input type="text" value="" placeholder="Description" id="description" name="description" required>					
+					<input type="text" value="" placeholder="Local" id="local" name="local" required>
+					<input type="text" value="" placeholder="Party type eg: party" id="partyType" name="partyType" required>	
+					<input type="radio"  value="public" name="type" id="typePublic" checked><label class="publicRB">public</label>
+					<input type="radio" value="private"  name="type" id="typePrivate"><label class="privateRB">private</label>	
 					<button id="create" type="submit">create</button>	
 				</form>
 				<button id="cancel" type="submit">cancel</button>

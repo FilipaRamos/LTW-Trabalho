@@ -1,9 +1,12 @@
-# LTW-Trabalho
+Inês Alexandra Santos Carneiro
+Filipa Marília Monteiro Ramos
+Pedro Vieira Lamares Martins
 
-Project developed for the computer engineering course at FEUP. 
+Grupo: 64
 
-Developed by
-Filipa Ramos
-Inês Carneiro
-Pedro Martins
+Alguns Login: 
+username: panados
+password: panados
 
+username: moura
+password: moura 

@@ -4,6 +4,10 @@ $("window").ready(function () {
 	$("#nav #createEvent").click(function () {
 		$(".createEvent").css("visibility", "visible")
 	});
+	
+	$("#nav #home").click(function () {
+		window.location.href = "user.php";
+	});
 
 	$("#nav #search-icon").click(function (ev) {
 		ev.preventDefault();
@@ -65,7 +69,7 @@ $("window").ready(function () {
 	});
 
 
-	$(".events-card-interesting #registerEvent").click(function (e) {
+	$(".events-card #registerEvent").click(function (e) {
 
 		var idEvent = $(".hiddenDiv").html();
 		$.post(
@@ -82,7 +86,7 @@ $("window").ready(function () {
 						swal("Oops...", "Already registed!", "error");
 						break;
 					case 'success':
-						swal("Registed");
+						window.location.href = "user.php";
 						break;
 					default:
 						break;
@@ -94,9 +98,9 @@ $("window").ready(function () {
 	});
 
 
-	$("#background-block").on("click", "#name", function (e) {
+	$("#background-block").on("click", ".events-card", function (e) {
 		e.preventDefault();
-		var idEvent = $(".hiddenDiv").html();
+		var idEvent = $(e.currentTarget).find(".hiddenDiv").html();
 
 		window.location.href = "eventPage.php?idEvent=" + idEvent;
 	});
@@ -202,7 +206,7 @@ $("window").ready(function () {
             success: function(response) {
 				console.log(response);
                 var data=JSON.parse(response);
-                if(data["fileuload"]!="success"){
+                if(data["fileupload"]!="success"){
                   console.log(data["fileupload"]); 
            
                 }
@@ -255,6 +259,26 @@ $("window").ready(function () {
 			}).fail(function (error) {
 				return false;
 			});
+	});
+	
+	$("#nav #search").keyup(function (e) {
+		var code = e.keyCode || e.which;
+		
+			var text = $('#nav #search').val();
+			$.post(
+				'../PHP/search.php',
+				{
+					'text': text
+				},
+
+			function (data) {
+				console.log(data);
+				$("#event-block").replaceWith(data);
+			}).fail(function (error) {
+				swal("FAILED!!");
+				return false;
+			});
+		
 	});
 
 	$("#nav #search").bind('keypress', function (e) {

@@ -101,6 +101,6 @@ body{
     cursor: pointer;
 }
 
-.login-block button:hover {
+.login-block button#login:hover {
     background: #005ce6;
 }

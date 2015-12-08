@@ -5,30 +5,76 @@ body{
     background-attachment: fixed;
     background-position: center center;
     font-family: Montserrat;
+    margin:0;
+    height: 100%;
+    width: 100%;
+    
+    margin: 0;
+    padding: 0;
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;   
 }
 
 .nav-bar{
      background-color: #FFC800;
-     width: 100%;
      position: static;
      top: 0;
-     height: 10%;
+     margin: 0;
+     height: 5rem;
+     width: 100%;
 }
 
+.innerNav{
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: table;
+    height: 5rem;
+    width: 70rem;
+}
+
+.nav-horizontal-bar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    height: 5rem;
+}
+
+#elemsRight{
+    float:right;
+}
+
+#elemsLeft{
+    float: left;
+}
+
+.li-hor {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.nav-bar button#home{
+    margin: 0.25rem;
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    cursor: pointer;
+}
 
 .nav-bar input#search{
-    margin-left: 10%;
-    width:20%;
-    height: 34px;
-    top:0;
+    outline:none;
+    height: 1.5rem;
     font-family: 'Raleway', sans-serif;
-    display: table-cell; 
 }
 
 .nav-bar button#search-icon{
-    top:0;
-    height: 30px;
-    display: table-cell; 
+    background-color: Transparent;
+    outline:none;
     overflow: hidden;
    }
 
@@ -36,82 +82,443 @@ body{
     background-color: Transparent;
     outline:none;
     border: none;
-    margin-left: 5px;
-    top:0;
-    display: table-cell; 
-    float:right;
-    margin-right: 10%;
+    cursor: pointer;
 }
 
 .nav-bar button#settings{
     background-color: Transparent;
     outline:none;
     border: none;
-    margin-left: 5px;
-    top:0;
-    display: table-cell; 
-    float:right;
+    margin: 0.25rem;
+    cursor: pointer;
 }
-	
+
 .nav-bar button#createEvent{
+    margin: 0.25rem;
     background-color: Transparent;
     outline:none;
     border: none;
-    margin-left: 5px;
-    top:0;
-    display: table-cell; 
-    float:right;
-    
+    cursor: pointer;  
 }
 
 .nav-bar label#profile{
-    margin-left: 5px;
-    padding: 0.5%;
-    top:0;
-    display: table-cell; 
-    float:right;
-     font-family: 'Raleway', sans-serif;
+    margin: 0.25rem;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+}
+
+.nav-bar button#home:hover{
+    background-color: yellow;
+}
+
+.nav-bar button#search-icon:hover{
+    background-color: yellow;
+}
+
+.nav-bar button#logOut:hover{
+    background-color: yellow;
+}
+
+.nav-bar button#settings:hover{
+    background-color: yellow;
+}
+
+.nav-bar button#createEvent:hover{
+    background-color: yellow;
+}
+
+.nav-bar label#profile:hover{
+    background-color: yellow;
+}
+
+div#background-block{
+    height: 100%;
+    width: 100%;
+}
+
+.innerNav2{
+    background-color: #FFC800;
+    border-top: 0.15rem solid black;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: table;
+    height: 2rem;
+    width: 70rem;
+}
+
+.nav-horizontal-bar2{
+    margin: auto;
+    width: 30rem;
+    padding: 0;
+    text-align: center;
+    
+}
+.nav-horizontal-bar2 button#interestingEvents{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.nav-horizontal-bar2 button#AdminEvents{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.nav-horizontal-bar2 button#AttendingEvents{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.nav-horizontal-bar2 button#InvitedEvents{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.nav-horizontal-bar2 button#interestingEvents:hover{
+    background-color: yellow;
+}
+
+.nav-horizontal-bar2 button#AdminEvents:hover{
+   background-color: yellow;
+}
+
+.nav-horizontal-bar2 button#AttendingEvents:hover{
+    background-color: yellow;
+}
+
+.nav-horizontal-bar2 button#InvitedEvents:hover{
+    background-color: yellow;
+}
+
+.event{
+    background-color: rgba(152, 77, 0, 0.48);
+    margin: 0 auto;
+    width: 70rem;
+    height: 100%;
 }
 
 
-
-.image-block {
-	background-color: royalblue;	
+.event-block{
+    background-color: #DAAC05;
+    position: relative;
+    width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-left: 3%;
+    
 }
 
-.editEvent {
+#type-host-attend{
+    margin-left: 2rem;
+}
+
+.invite-list {
     position: fixed;
-    width: 40%;
+    width: 40rem;
+    height: 30rem;
     padding: 20px;
     background: #fff;
-    margin-right: auto;
-    margin-left: 420px;
-    margin-top:  300px;
+    margin-top: 5rem;
+    margin-right: 5rem;
+    margin-left: 12rem;
     top: 0px;
+    visibility: hidden;
+    overflow: scroll;
+    overflow-y: visible;
+}
+.hiddenDividUser{
     visibility: hidden;
 }
 
+.username{
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 2rem;    
+}
+
+#addComment{
+    margin-left: 3rem;
+    margin-top: 2rem;
+}
+
+.buttons{
+     display: table;
+     float:right;
+     margin-right: 3rem;
+     margin-top: 1rem;
+}
+
+.hiddenDivEvent {
+    visibility: hidden;
+}
+
+.li-hor {
+    display: table-cell;
+    vertical-align: middle;
+ }
+
+.buttons button#inviteMail{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.buttons button#deleteEvent{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.buttons button#editPencil{
+    background-color: Transparent;
+    outline:none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    height: 2rem;
+}
+
+h1{
+    margin: 2rem 0;
+    padding:0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+}
+
+.hostedBy{
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 1rem;
+}
+
+.yes{
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 2rem;
+}
+
+
+.no{
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+}
+
+p{
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 2rem;
+}
+
+.Going-list{
+    font-weight: bold;
+    margin: 2rem 0;
+    padding:0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+}
+
+#Going-list{
+    background-color: #DAAC05;
+    position: relative;
+    width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-left: 3%;
+}
+.Comments{
+    font-weight: bold;
+    margin: 2rem 0;
+    padding:0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;  
+}
+
+.comments-block{
+    background-color: #DAAC05;
+    position: relative;
+    width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-left: 3%;
+}
+
+.commentBody{
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal; 
+    margin-left: 3rem;
+}
+
+#event-info {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.event-image {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    /* width: 49%; */
+    height: 100%;
+}
+
+.event-image img {
+    width: 100%;
+    /* height: auto; */
+    /* margin: 0 auto; */
+}
+
+.union {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 25rem;
+}
+
+.editEvent {
+    position: relative;
+    width: 20rem;
+    padding: 20px;
+    background: #fff;
+    margin-top : -30rem;
+    margin-left: 30rem;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;  
+    visibility: hidden;
+}
 
 .editEvent input{ 
-    top: 0px;
+    top: 0;
     width: 100%;
+    height: 1.5rem;
     box-sizing: border-box;
     border: 1px solid #ccc;
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
-    outline: none; 
+    outline: none;
+    margin-bottom: 0.5rem; 
 }
 
+.editEvent input#typePublic{ 
+    width: 1rem;
+    height: 1rem;
+}
 
+.editEvent input#typePrivate{ 
+    width: 1rem;
+    height: 1rem;
+}
 
-.invite-list {
-    position: fixed;
-    width: 40%;
-    padding: 20px;
-    background: #fff;
-    margin-right: auto;
-    margin-left: 420px;
-    margin-top:  300px;
-    top: 0px;
-    visibility: hidden;
+.editEvent button#save{
+    margin-top: 0.5rem;
+    width: 100%;
+    height: 2rem;
+    background: #4d94ff;
+    box-sizing: border-box;
+    border: 1px solid #008ae6;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+    cursor: pointer;
+}
+
+.publicRB{
+    margin-right: 2rem;
+    margin-left: 0.25rem;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+}
+
+.privateRB{
+    margin-right: 2rem;
+    margin-left: 0.25rem;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+}
+
+.editEvent button#cancel{
+    margin-top: 5px;
+    width: 100%;
+    height: 2rem;
+    background: #ff3377;
+    box-sizing: border-box;
+    border: 1px solid #ff0055;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+    cursor: pointer;
+}
+
+.editEvent button#create:hover {
+    background: #005ce6;
 }

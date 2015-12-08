@@ -1,5 +1,9 @@
 $("window").ready(function () {
-
+	
+	$("#nav #home").click(function () {
+		window.location.href = "user.php";
+	});
+	
 	$("#createEventForm").submit(function(ev) {
 		ev.preventDefault();
 
@@ -146,6 +150,7 @@ $("window").ready(function () {
 	});
 	
 	
+	
 	$("#addComment #add").click(function(ev){
 		ev.preventDefault();
 		
@@ -177,6 +182,7 @@ $("window").ready(function () {
 						$("#addComment #comentario").val("");
 						break;
 					default:
+					
 						break;
 				}
 			}).fail(function (error) {
@@ -259,6 +265,12 @@ $("window").ready(function () {
 				swal("FAILED!!");
 				return false;
 			});
+	});
+	
+	$(".image-block #editPencil").click(function(){
+		
+		$(".invite-list").css("visibility","visible");	
+		
 	});
 	
 

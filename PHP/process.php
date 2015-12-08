@@ -1,6 +1,7 @@
 <?php
 
-include_once('../sqlite/connection.php');
+require_once('../sqlite/connection.php');
+require_once('getSet.php');
 
 function existsUser($username){
 	$file=new PDO('sqlite:../sqlite/database.db');
@@ -52,12 +53,30 @@ function checkLogIn($username, $password){
 			}
 		}
 	}
+
 	
-	if(hash_equals($hashed, crypt($password, $hashed))){
+	/*if(hash_equals($hashed, crypt($password, $hashed))){
 		return true;
 	}
-	return false;	
+	return false;	*/
+	
+	return decrypt($password, $hashed);
 }
+
+
+function encrypt($password, $cost) {
+
+		if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
+	        $salt = '$2y$11$' . substr(md5(uniqid(rand(), true)), 0, 22);
+	        return crypt($password, $salt);
+    	}
+}
+
+function decrypt($password, $hashedPass) {
+	return crypt($password, $hashedPass) == $hashedPass;
+}
+
+
 
 function createUser($username, $password, $name, $email){
 	$file=new PDO('sqlite:../sqlite/database.db');
@@ -69,7 +88,8 @@ function createUser($username, $password, $name, $email){
     		'cost' => 12,
 		];
 		
-	$pass = password_hash($password, PASSWORD_BCRYPT, $options);
+	/*$pass = password_hash($password, PASSWORD_BCRYPT, $options);*/
+	$pass =  encryptPassword($password, $options);
 	
 		
 	$stmt = $file->prepare('INSERT INTO User(username, password, name, email) VALUES (:username, :password, :name, :email)');
@@ -243,7 +263,8 @@ function createEvent($idUser, $name, $image, $eventDate, $startHour, $descriptio
 	$stmt->bindParam(':partyType', $partyType, PDO::PARAM_STR);
 	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
 	$stmt->execute();
-	$result = $stmt->lastInsertId();
+
+	$result = $file->lastInsertId('idEvent');
 
 	return $result;
 }
@@ -354,8 +375,9 @@ function userEventsAttending($idUser){
 function isAdminEvent($idUser, $idEvent){
 	$file=new PDO('sqlite:../sqlite/database.db');	
 	
-	$stmt = $file->prepare('SELECT * FROM Event WHERE idUser = :idUser');
+	$stmt = $file->prepare('SELECT * FROM Event WHERE idUser = :idUser AND idEvent= :idEvent');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	
@@ -408,7 +430,8 @@ function addComment($idUser, $idEvent, $comentario){
 	$stmt->bindParam(':comentario', $comentario, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
-
+	
+		
 	return true;
 }
 
