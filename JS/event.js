@@ -4,51 +4,35 @@ $("window").ready(function () {
 		window.location.href = "user.php";
 	});
 	
-	$("#createEventForm").submit(function(ev) {
+	$("#editEventForm").submit(function (ev) {
 		ev.preventDefault();
-
-		var nome = $("#createEventForm #name").val();
-		var imagem = $("#createEventForm #image").val();
-		var eventDate = $("#createEventForm #eventDate").val();
-		var eventHour =  $("#createEventForm #startHour").val();
-		var descricao =  $("#createEventForm #description").val();
-		var local =  $("#createEventForm #local").val();
-		var tipo =  $("#createEventForm").find("input[type='radio'][name='type']:checked").val();
-		var partyType =  $("#createEventForm #partyType").val();
-		
-		$.post(
-			'../PHP/uploadfile.php',
-			{
-				'idUser': idUser,
-				'name': nome,
-				'image': imagem,
-				'eventDate' : eventDate,
-				'startHour' : eventHour,
-				'description' : descricao,
-				'local' : local,
-				'partyType' : partyType,
-				'type' : tipo
-			},
-			
-			function (data) {
-				var resposta = data['userpage'];
 				
-				switch (resposta) {
-					case 'error':
-						swal("Oops...", "User already exists!", "error");
-						break;
-					case 'success':
-						swal("YAY NEW EVENT!!");
-						$(".createEvent").css("visibility","hidden");
-						break;
-					default:
-						break;
-				}
-			}).fail(function (error) {
-				swal("FAILED!!");
-				return false;
-			});
-	});	
+		var formData = new FormData(this);
+		        
+	$.ajax({
+            type: "POST",
+            url: "../PHP/editEvent.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+				console.log(response);
+                var data=JSON.parse(response);
+                if(data["fileupload"]!="success"){
+                  console.log(data["fileupload"]); 
+           
+                }
+            },
+            error: function(errResponse) {
+                console.log(errResponse);
+            },
+            complete: function() 
+            {
+                location.reload();
+            }
+        });
+		
+	});
 	
 	$("#nav #search").bind('keypress',function(e){
 		var code = e.keyCode || e.which;
@@ -141,7 +125,7 @@ $("window").ready(function () {
 			$(".createEvent").css("visibility","hidden");
 	});
 	
-	$(".image-block").click(function() {
+	$("#editPencil").click(function() {
 			$(".editEvent").css("visibility","visible");
 	});	
 	
@@ -267,9 +251,9 @@ $("window").ready(function () {
 			});
 	});
 	
-	$(".image-block #editPencil").click(function(){
+	$(".buttons #editPencil").click(function(){
 		
-		$(".invite-list").css("visibility","visible");	
+		$(".editEvent").css("visibility","visible");	
 		
 	});
 	

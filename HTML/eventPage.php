@@ -65,7 +65,10 @@
 				<div class="event">
 					<div class="event-block">
 						<div class="buttons">
-							<li class="li-hor"><button id="editPencil"><i class="fa fa-pencil fa-4x"></i></button></li>
+							<?php 
+							if(isAdminEvent($idUser, $_GET['idEvent']))
+							 	echo '<li class="li-hor"><button id="editPencil"><i class="fa fa-pencil fa-4x"></i></button></li>';
+							?>
 							<li class="li-hor"><button id="inviteMail"><i class="fa fa-envelope fa-4x"></i></button></li>
 							<li class="li-hor"><div class="hiddenDivEvent"><?php echo $_GET['idEvent']?></div></li> 
 							<?php 
@@ -130,6 +133,7 @@
 			</div>
 			<div class= "editEvent">
 				<form id="editEventForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" value=<?php echo $event[0]['idEvent']?> name="idEvent">
 					<input type="text" value=<?php echo $event[0]['name'] ?>  placeholder="Name" id="name" name="name" required>	
 					<input type="file" name="image" value=<?php echo $event[0]['image'] ?> id="image" >
 					<input type="date" value=<?php echo $event[0]['eventDate'] ?> placeholder="Date" id="eventDate" name="eventDate" required>					

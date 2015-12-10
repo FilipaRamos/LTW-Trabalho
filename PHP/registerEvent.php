@@ -13,6 +13,7 @@
 	
 	$params = ['idEvent'];
 
+
 	foreach ($params as $param) {
 		if (isset($_POST[$param])) {
 			$params[$param] = $_POST[$param];

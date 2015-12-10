@@ -3,6 +3,9 @@
 
 	include_once('process.php');
 	include_once('getSet.php');
+	
+	
+
 
 	function response($value){
 		$data = ['invite' => $value];
@@ -19,6 +22,8 @@
 		}
 	}
 	
+	
+	
 	if (!(invite($params['idUser'],$params['idEvent']))) {
 		response("error");
 	}
@@ -33,7 +38,7 @@
 					echo '<label><p>' . $inv['username'] . '</p></label>';
 					echo '<button id="inviteIcon"><i class="fa fa-user-plus"></i></button>';
 				}
-				
+			
 				echo '<button id="invite" type="submit">invite</button>';	
 			echo '</form>';
 		echo '</div>';

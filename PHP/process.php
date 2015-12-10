@@ -269,8 +269,7 @@ function createEvent($idUser, $name, $image, $eventDate, $startHour, $descriptio
 	return $result;
 }
 
-function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $neweventDate, $startHour, $newstartHour, 
-	$description, $newdescription, $local, $newlocal, $type, $newtype){
+function editEvent($idEvent, $newname, $newImage, $neweventDate, $newstartHour, $newdescription, $newlocal, $newpartyType, $newType){
 		
 	$file=new PDO('sqlite:../sqlite/database.db');
 	
@@ -279,13 +278,14 @@ function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $ne
 	$stmt->bindParam(':newname', $newname, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
-	
+
+if(!($newImage === "")){
 	$stmt = $file->prepare('UPDATE Event SET image = :newImage WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
-	$stmt->bindParam(':newimage', $newimage, PDO::PARAM_STR);
+	$stmt->bindParam(':newImage', $newImage, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
-
+}
 	$stmt = $file->prepare('UPDATE Event SET eventDate = :neweventDate WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':neweventDate', $neweventDate, PDO::PARAM_STR);
@@ -315,7 +315,14 @@ function editEvent($idEvent, $name, $newname, $image, $newImage, $eventDate, $ne
 	$stmt->bindParam(':newtype', $newtype, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
+	
+	$stmt = $file->prepare('UPDATE Event SET partyType = :newpartyType WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':newpartyType', $newpartyType, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
 
+	return true;
 }
 
 function searchEvent($name){

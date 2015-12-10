@@ -208,7 +208,6 @@ $("window").ready(function () {
                 var data=JSON.parse(response);
                 if(data["fileupload"]!="success"){
                   console.log(data["fileupload"]); 
-           
                 }
             },
             error: function(errResponse) {
@@ -219,6 +218,7 @@ $("window").ready(function () {
                 location.reload();
             }
         });
+           $(".createEvent").css("visibility", "hidden")
 		
 	});
 
